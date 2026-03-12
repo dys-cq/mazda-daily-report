@@ -1,4 +1,4 @@
-import os, re, pandas as pd
+import os, re, json, pandas as pd
 from datetime import datetime
 
 stores = {
@@ -296,8 +296,130 @@ with open(md_path,'w',encoding='utf-8') as f:
     f.write(md_text)
 print('MD written', md_path)
 
+def esc(x):
+    s='' if x is None else str(x)
+    return (s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;'))
+
+def fmt_metric(name, val):
+    # 比率字段转百分比显示
+    if val is None or str(val)=='nan':
+        return ''
+    if any(k in str(name) for k in ['率']):
+        try:
+            f=float(val)
+            if 0 <= f <= 1:
+                return f"{f*100:.2f}%"
+            return f"{f:.2f}%"
+        except Exception:
+            return esc(val)
+    return esc(val)
+
+html_parts=[]
+html_parts.append("""
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KPI 每日全维度分析报告</title>
+  <style>
+    body{font-family:'Microsoft YaHei',Arial,sans-serif;background:#f6f8fb;color:#1f2937;margin:0;padding:20px}
+    .container{max-width:1200px;margin:0 auto}
+    .title{background:#fff;padding:20px 24px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:16px}
+    .store{background:#fff;padding:18px 20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:16px}
+    h1{margin:0 0 8px;color:#0f5fd6}
+    h2{margin:8px 0 12px;color:#0f5fd6}
+    h3{margin:12px 0 8px;color:#374151}
+    .meta{color:#6b7280;font-size:14px}
+    table{width:100%;border-collapse:collapse;margin:8px 0 14px;background:#fff}
+    th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left;font-size:14px}
+    th{background:#eff6ff}
+    ul{margin:6px 0 12px 18px}
+    li{margin:4px 0}
+  </style>
+</head>
+<body><div class="container">
+""")
+
+html_parts.append(f"<div class='title'><h1>KPI 每日全维度分析报告</h1><div class='meta'>报告日期：{esc(report_date)} | 生成时间：{esc(datetime.now().strftime('%Y-%m-%d %H:%M'))}</div></div>")
+
+for store in stores:
+    s=summary[store]
+    html_parts.append(f"<section class='store'><h2>{esc(store)}</h2>")
+
+    # 经营
+    html_parts.append("<h3>经营（日常）</h3>")
+    if s['biz'] is not None:
+        r=s['biz']; cols=r.index
+        def anyv(keys):
+            for c in cols:
+                if any(k in str(c) for k in keys):
+                    return r[c]
+            return None
+        metrics=[
+            ('服务总收入', anyv(['服务总'])), ('零件总收入', anyv(['零件总'])), ('工时总收入', anyv(['工时总'])),
+            ('普通维修产值', anyv(['普通维修产值'])), ('事故维修产值', anyv(['事故维修产值'])),
+            ('进店台次', anyv(['进店','台次'])), ('成交台次', anyv(['成交台次','成交批次'])),
+            ('零件达成率', anyv(['零件','达成'])), ('台次达成率', anyv(['台次','达成'])),
+            ('机油单车', anyv(['机油','单车'])), ('事故单车', anyv(['事故','单车'])), ('Q1累计零件', anyv(['Q1']))
+        ]
+        html_parts.append("<table><tr><th>指标</th><th>数值</th></tr>")
+        for k,v in metrics:
+            if v is not None and str(v)!='nan':
+                html_parts.append(f"<tr><td>{esc(k)}</td><td>{fmt_metric(k,v)}</td></tr>")
+        html_parts.append("</table>")
+    else:
+        html_parts.append("<div>（无经营数据）</div>")
+
+    # 平台
+    html_parts.append("<h3>保险/平台线索</h3>")
+    if s['platform'] is not None:
+        p=s['platform']
+        html_parts.append("<table><tr><th>指标</th><th>数值</th></tr>")
+        for c in p.index[:12]:
+            html_parts.append(f"<tr><td>{esc(c)}</td><td>{esc(p[c])}</td></tr>")
+        html_parts.append("</table>")
+    else:
+        html_parts.append("<div>（无平台数据）</div>")
+
+    # 客诉/线索
+    html_parts.append("<h3>客诉/线索</h3>")
+    if s['lead'] is not None:
+        info=s['lead']
+        html_parts.append(f"<ul><li>总数: {esc(info['total'])}</li><li>未关闭: {esc(info['unclosed'])}</li><li>已关闭: {esc(info['closed'])}</li><li>超时&gt;0: {esc(info['timeout'])}</li></ul>")
+        html_parts.append("<table><tr><th>字段</th><th>示例</th></tr>")
+        for c in info['sample'].columns[:4]:
+            html_parts.append(f"<tr><td>{esc(c)}</td><td>{esc(info['sample'].iloc[0][c])}</td></tr>")
+        html_parts.append("</table>")
+    else:
+        html_parts.append("<div>（无客诉/线索数据）</div>")
+
+    # CSI
+    html_parts.append("<h3>CSI 自主调研</h3>")
+    if s['csi_stat']:
+        html_parts.append("<table><tr><th>指标</th><th>数值</th></tr>")
+        for k,v in s['csi_stat'].items():
+            html_parts.append(f"<tr><td>{esc(k)}</td><td>{fmt_metric(k,v)}</td></tr>")
+        html_parts.append("</table>")
+    else:
+        html_parts.append("<div>（无 CSI 统计数据）</div>")
+
+    html_parts.append("<h3>不满意客户</h3>")
+    if s['csi_bad'] is not None:
+        bad=s['csi_bad']
+        html_parts.append(f"<div>不满意客户数：{len(bad)}</div>")
+        html_parts.append("<table><tr><th>字段</th><th>示例</th></tr>")
+        for c in bad.columns[:6]:
+            html_parts.append(f"<tr><td>{esc(c)}</td><td>{esc(bad.iloc[0][c])}</td></tr>")
+        html_parts.append("</table>")
+    else:
+        html_parts.append("<div>（本店无不满意客户）</div>")
+
+    html_parts.append("</section>")
+
+html_parts.append("</div></body></html>")
+
 html_path=os.path.join(workspace,'KPI 日报_20260310_full.html')
-html=f"<html><head><meta charset='utf-8'><title>KPI 全维度报告</title></head><body><pre>{md_text}</pre></body></html>"
 with open(html_path,'w',encoding='utf-8') as f:
-    f.write(html)
+    f.write(''.join(html_parts))
 print('HTML written', html_path)
