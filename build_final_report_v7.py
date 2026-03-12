@@ -175,7 +175,7 @@ if os.path.exists(biz_csv):
 
 # markdown output (keep)
 now=datetime.now().strftime('%Y-%m-%d %H:%M')
-md=['# KPI 每日全维度分析报告（重算版）', '', f'**报告日期**: 2026-03-10  ', f'**生成时间**: {now}  ', '']
+md=['# KPI 每日全维度分析报告', '', f'**报告日期**: 2026-03-10  ', f'**生成时间**: {now}  ', '']
 for st in stores:
     md.append(f'## {st}')
     ls=lead_stats.get(st,{'total':0,'closed':0,'unclosed':0,'timeout':0})
@@ -264,7 +264,7 @@ body{{font-family:'Microsoft YaHei',Arial;background:#f7f8fb;padding:20px;color:
 table{{border-collapse:collapse;width:100%;font-size:14px}}th,td{{border:1px solid #e5e7eb;padding:8px;vertical-align:top}}th{{background:#f3f4f6;text-align:left}}
 canvas{{max-height:320px}}
 </style></head><body><div class='wrap'>
-<h1>KPI 每日全维度分析报告（重算版）</h1>
+<h1>KPI 每日全维度分析报告</h1>
 <p>报告日期：2026-03-10 ｜ 生成时间：{now}</p>
 <section class='card'><h3>总览图表</h3><canvas id='leadChart'></canvas><br/><canvas id='csiChart'></canvas></section>
 {''.join(cards)}
