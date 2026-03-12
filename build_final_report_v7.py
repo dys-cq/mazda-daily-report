@@ -21,12 +21,13 @@ if not daily:
 
 run_folder = os.path.join(daily, '2026-03-11-重新统计')
 os.makedirs(run_folder, exist_ok=True)
-files=os.listdir(daily)
+# 从 run_folder 查找文件（CSV 文件导出到这里）
+files=os.listdir(run_folder)
 
-lead_file=next((os.path.join(daily,f) for f in files if '线索' in f or '客诉' in f), None)
-csi_file=next((os.path.join(daily,f) for f in files if f.lower().startswith('csi')), None)
+lead_file=next((os.path.join(run_folder,f) for f in files if '线索' in f or '客诉' in f or '投诉' in f), None)
+csi_file=next((os.path.join(run_folder,f) for f in files if f.lower().startswith('csi')), None)
 # 保险/平台线索（跳过临时文件~$）
-platform_file=next((os.path.join(daily,f) for f in files if ('平台' in f or 'ƽ' in f) and not f.startswith('~$')), None)
+platform_file=next((os.path.join(run_folder,f) for f in files if ('平台' in f or 'ƽ' in f or '汇总' in f) and not f.startswith('~$')), None)
 
 # lead
 lead_df=None
