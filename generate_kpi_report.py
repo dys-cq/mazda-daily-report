@@ -24,5 +24,5 @@ if result.returncode != 0:
 
 print()
 print('='*60)
-print('✅ 完成！报表已生成到 E:/2026 年 KPI/每日分析/ 目录')
+print('OK! Report generated to E:/2026 年 KPI/每日分析/')
 print('='*60)
