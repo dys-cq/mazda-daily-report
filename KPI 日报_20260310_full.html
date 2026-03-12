@@ -1,25 +1,146 @@
+<!doctype html>
+<html><head><meta charset='utf-8'><title>KPI重算版</title>
+<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+<style>
+body{font-family:'Microsoft YaHei',Arial;background:#f7f8fb;padding:20px;color:#222}
+.wrap{max-width:1200px;margin:0 auto}
+.card{background:#fff;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid #e5e7eb;padding:8px;vertical-align:top}th{background:#f3f4f6;text-align:left}
+canvas{max-height:320px}
+</style></head><body><div class='wrap'>
+<h1>KPI 每日全维度分析报告</h1>
+<p>报告日期：2026-03-10 ｜ 生成时间：2026-03-12 11:25</p>
+<section class='card'><h3>总览图表</h3><canvas id='leadChart'></canvas><br/><canvas id='csiChart'></canvas></section>
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KPI 每日全维度分析报告</title>
-  <style>
-    body{font-family:'Microsoft YaHei',Arial,sans-serif;background:#f6f8fb;color:#1f2937;margin:0;padding:20px}
-    .container{max-width:1200px;margin:0 auto}
-    .title{background:#fff;padding:20px 24px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:16px}
-    .store{background:#fff;padding:18px 20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:16px}
-    h1{margin:0 0 8px;color:#0f5fd6}
-    h2{margin:8px 0 12px;color:#0f5fd6}
-    h3{margin:12px 0 8px;color:#374151}
-    .meta{color:#6b7280;font-size:14px}
-    table{width:100%;border-collapse:collapse;margin:8px 0 14px;background:#fff}
-    th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left;font-size:14px}
-    th{background:#eff6ff}
-    ul{margin:6px 0 12px 18px}
-    li{margin:4px 0}
-  </style>
-</head>
-<body><div class="container">
-<div class='title'><h1>KPI 每日全维度分析报告</h1><div class='meta'>报告日期：2026-03-10 | 生成时间：2026-03-12 11:04</div></div><section class='store'><h2>重庆金团</h2><h3>经营（日常）</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>服务总收入</td><td>551460.03</td></tr><tr><td>零件总收入</td><td>386630.39</td></tr><tr><td>工时总收入</td><td>164829.64</td></tr><tr><td>普通维修产值</td><td>32758.47</td></tr><tr><td>事故维修产值</td><td>433130.17</td></tr><tr><td>进店台次</td><td>83.0</td></tr><tr><td>零件达成率</td><td>386630.39%</td></tr><tr><td>台次达成率</td><td>83.00%</td></tr><tr><td>事故单车</td><td>433130.17</td></tr></table><h3>保险/平台线索</h3><div>（无平台数据）</div><h3>客诉/线索</h3><div>（无客诉/线索数据）</div><h3>CSI 自主调研</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>经销商名称</td><td>重庆金团汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>140</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>6</td></tr><tr><td>参与率</td><td>4.29%</td></tr><tr><td>满意客户数</td><td>6</td></tr><tr><td>满意率</td><td>100.00%</td></tr></table><h3>不满意客户</h3><div>（本店无不满意客户）</div></section><section class='store'><h2>重庆瀚达</h2><h3>经营（日常）</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>服务总收入</td><td>144521.26</td></tr><tr><td>零件总收入</td><td>91001.84</td></tr><tr><td>工时总收入</td><td>53519.42</td></tr><tr><td>普通维修产值</td><td>32389.55</td></tr><tr><td>事故维修产值</td><td>73162.77</td></tr><tr><td>进店台次</td><td>102.0</td></tr><tr><td>零件达成率</td><td>91001.84%</td></tr><tr><td>台次达成率</td><td>102.00%</td></tr><tr><td>事故单车</td><td>73162.77</td></tr></table><h3>保险/平台线索</h3><div>（无平台数据）</div><h3>客诉/线索</h3><div>（无客诉/线索数据）</div><h3>CSI 自主调研</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>经销商名称</td><td>重庆瀚达汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>60</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>20</td></tr><tr><td>参与率</td><td>33.33%</td></tr><tr><td>满意客户数</td><td>20</td></tr><tr><td>满意率</td><td>100.00%</td></tr></table><h3>不满意客户</h3><div>（本店无不满意客户）</div></section><section class='store'><h2>重庆银马</h2><h3>经营（日常）</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>服务总收入</td><td>244472.98</td></tr><tr><td>零件总收入</td><td>139340.17</td></tr><tr><td>工时总收入</td><td>105132.81</td></tr><tr><td>普通维修产值</td><td>106977.53</td></tr><tr><td>事故维修产值</td><td>12288.57</td></tr><tr><td>进店台次</td><td>318.0</td></tr><tr><td>零件达成率</td><td>139340.17%</td></tr><tr><td>台次达成率</td><td>318.00%</td></tr><tr><td>事故单车</td><td>12288.57</td></tr></table><h3>保险/平台线索</h3><div>（无平台数据）</div><h3>客诉/线索</h3><div>（无客诉/线索数据）</div><h3>CSI 自主调研</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>经销商名称</td><td>重庆银马汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>143</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>26</td></tr><tr><td>参与率</td><td>18.18%</td></tr><tr><td>满意客户数</td><td>26</td></tr><tr><td>满意率</td><td>100.00%</td></tr></table><h3>不满意客户</h3><div>（本店无不满意客户）</div></section><section class='store'><h2>重庆万事新</h2><h3>经营（日常）</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>服务总收入</td><td>426157.81</td></tr><tr><td>零件总收入</td><td>318375.89</td></tr><tr><td>工时总收入</td><td>107781.92</td></tr><tr><td>普通维修产值</td><td>48097.09</td></tr><tr><td>事故维修产值</td><td>261123.75</td></tr><tr><td>进店台次</td><td>155.0</td></tr><tr><td>零件达成率</td><td>318375.89%</td></tr><tr><td>台次达成率</td><td>155.00%</td></tr><tr><td>事故单车</td><td>261123.75</td></tr></table><h3>保险/平台线索</h3><div>（无平台数据）</div><h3>客诉/线索</h3><div>（无客诉/线索数据）</div><h3>CSI 自主调研</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>经销商名称</td><td>重庆万事新汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>148</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>2</td></tr><tr><td>参与率</td><td>1.35%</td></tr><tr><td>满意客户数</td><td>2</td></tr><tr><td>满意率</td><td>100.00%</td></tr></table><h3>不满意客户</h3><div>（本店无不满意客户）</div></section><section class='store'><h2>西藏鼎恒</h2><h3>经营（日常）</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>普通维修产值</td><td>0.0</td></tr><tr><td>事故维修产值</td><td>0.0</td></tr><tr><td>进店台次</td><td>0.0</td></tr><tr><td>台次达成率</td><td>0.00%</td></tr><tr><td>事故单车</td><td>0.0</td></tr></table><h3>保险/平台线索</h3><div>（无平台数据）</div><h3>客诉/线索</h3><div>（无客诉/线索数据）</div><h3>CSI 自主调研</h3><table><tr><th>指标</th><th>数值</th></tr><tr><td>经销商名称</td><td>西藏鼎恒实业有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>0</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>0</td></tr><tr><td>参与率</td><td>0.00%</td></tr><tr><td>满意客户数</td><td>0</td></tr><tr><td>满意率</td><td>0.00%</td></tr></table><h3>不满意客户</h3><div>（本店无不满意客户）</div></section></div></body></html>
+    <section class='card'>
+      <h2>重庆金团</h2>
+      <div class='grid'>
+        <div>
+          <h3>经营（日常）</h3>
+          <table><tbody><tr><td>服务总收入</td><td>551460.03</td></tr><tr><td>零件总收入</td><td>386630.39</td></tr><tr><td>工时总收入</td><td>164829.64</td></tr><tr><td>进店台次</td><td>83.0</td></tr><tr><td>零件达成率</td><td>386630.39</td></tr><tr><td>台次达成率</td><td>83.0</td></tr><tr><td>事故单车</td><td>433130.17</td></tr></tbody></table>
+          <h3>保险/平台线索</h3>
+          <table><tbody><tr><td>编号</td><td>143.0</td></tr><tr><td>经销商代码</td><td>M18003</td></tr><tr><td>经销商简称</td><td>重庆金团汽车销售服务有限公司</td></tr><tr><td>区域</td><td>西区</td></tr><tr><td>服务区域经理</td><td>孔立刚</td></tr><tr><td>新保出单</td><td>0</td></tr><tr><td>续保出单</td><td>0</td></tr><tr><td>续保录单</td><td>124</td></tr><tr><td>续保汇总</td><td>124</td></tr><tr><td>忠诚用户</td><td>3381</td></tr><tr><td>月续保率</td><td>0.4401064773735581</td></tr></tbody></table>
+        </div>
+        <div>
+          <h3>客诉/线索</h3>
+          <ul>
+            <li>客诉/线索总数：<b>2</b></li>
+            <li>未关闭：<b>0</b></li>
+            <li>已关闭：<b>2</b></li>
+            <li>超时时长（处理）&gt;0：<b>0</b></li>
+          </ul>
+          <h3>CSI 自主调研</h3>
+          <table><tbody><tr><td>经销商名称</td><td>重庆金团汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>140</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>6</td></tr><tr><td>参与率</td><td>4.29%</td></tr><tr><td>满意客户数</td><td>6</td></tr><tr><td>满意率</td><td>100.00%</td></tr></tbody></table>
+          <h4>不满意客户</h4>
+          （本店无不满意客户）
+        </div>
+      </div>
+    </section>
+    
+    <section class='card'>
+      <h2>重庆瀚达</h2>
+      <div class='grid'>
+        <div>
+          <h3>经营（日常）</h3>
+          <table><tbody><tr><td>服务总收入</td><td>144521.26</td></tr><tr><td>零件总收入</td><td>91001.84</td></tr><tr><td>工时总收入</td><td>53519.42</td></tr><tr><td>进店台次</td><td>102.0</td></tr><tr><td>零件达成率</td><td>91001.84</td></tr><tr><td>台次达成率</td><td>102.0</td></tr><tr><td>事故单车</td><td>73162.77</td></tr></tbody></table>
+          <h3>保险/平台线索</h3>
+          <table><tbody><tr><td>编号</td><td>144.0</td></tr><tr><td>经销商代码</td><td>M23002</td></tr><tr><td>经销商简称</td><td>重庆瀚达汽车销售服务有限公司</td></tr><tr><td>区域</td><td>西区</td></tr><tr><td>服务区域经理</td><td>孔立刚</td></tr><tr><td>新保出单</td><td>0</td></tr><tr><td>续保出单</td><td>0</td></tr><tr><td>续保录单</td><td>59</td></tr><tr><td>续保汇总</td><td>59</td></tr><tr><td>忠诚用户</td><td>1878</td></tr><tr><td>月续保率</td><td>0.3769968051118211</td></tr></tbody></table>
+        </div>
+        <div>
+          <h3>客诉/线索</h3>
+          <ul>
+            <li>客诉/线索总数：<b>1</b></li>
+            <li>未关闭：<b>0</b></li>
+            <li>已关闭：<b>1</b></li>
+            <li>超时时长（处理）&gt;0：<b>0</b></li>
+          </ul>
+          <h3>CSI 自主调研</h3>
+          <table><tbody><tr><td>经销商名称</td><td>重庆瀚达汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>60</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>20</td></tr><tr><td>参与率</td><td>33.33%</td></tr><tr><td>满意客户数</td><td>20</td></tr><tr><td>满意率</td><td>100.00%</td></tr></tbody></table>
+          <h4>不满意客户</h4>
+          （本店无不满意客户）
+        </div>
+      </div>
+    </section>
+    
+    <section class='card'>
+      <h2>重庆银马</h2>
+      <div class='grid'>
+        <div>
+          <h3>经营（日常）</h3>
+          <table><tbody><tr><td>服务总收入</td><td>244472.98</td></tr><tr><td>零件总收入</td><td>139340.17</td></tr><tr><td>工时总收入</td><td>105132.81</td></tr><tr><td>进店台次</td><td>318.0</td></tr><tr><td>零件达成率</td><td>139340.17</td></tr><tr><td>台次达成率</td><td>318.0</td></tr><tr><td>事故单车</td><td>12288.57</td></tr></tbody></table>
+          <h3>保险/平台线索</h3>
+          <table><tbody><tr><td>编号</td><td>142.0</td></tr><tr><td>经销商代码</td><td>A28856</td></tr><tr><td>经销商简称</td><td>重庆银马汽车销售服务有限公司</td></tr><tr><td>区域</td><td>西区</td></tr><tr><td>服务区域经理</td><td>孔立刚</td></tr><tr><td>新保出单</td><td>0</td></tr><tr><td>续保出单</td><td>48</td></tr><tr><td>续保录单</td><td>165</td></tr><tr><td>续保汇总</td><td>213</td></tr><tr><td>忠诚用户</td><td>5083</td></tr><tr><td>月续保率</td><td>0.5028526460751525</td></tr></tbody></table>
+        </div>
+        <div>
+          <h3>客诉/线索</h3>
+          <ul>
+            <li>客诉/线索总数：<b>6</b></li>
+            <li>未关闭：<b>0</b></li>
+            <li>已关闭：<b>6</b></li>
+            <li>超时时长（处理）&gt;0：<b>0</b></li>
+          </ul>
+          <h3>CSI 自主调研</h3>
+          <table><tbody><tr><td>经销商名称</td><td>重庆银马汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>143</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>26</td></tr><tr><td>参与率</td><td>18.18%</td></tr><tr><td>满意客户数</td><td>26</td></tr><tr><td>满意率</td><td>100.00%</td></tr></tbody></table>
+          <h4>不满意客户</h4>
+          （本店无不满意客户）
+        </div>
+      </div>
+    </section>
+    
+    <section class='card'>
+      <h2>重庆万事新</h2>
+      <div class='grid'>
+        <div>
+          <h3>经营（日常）</h3>
+          <table><tbody><tr><td>服务总收入</td><td>426157.81</td></tr><tr><td>零件总收入</td><td>318375.89</td></tr><tr><td>工时总收入</td><td>107781.92</td></tr><tr><td>进店台次</td><td>155.0</td></tr><tr><td>零件达成率</td><td>318375.89</td></tr><tr><td>台次达成率</td><td>155.0</td></tr><tr><td>事故单车</td><td>261123.75</td></tr></tbody></table>
+          <h3>保险/平台线索</h3>
+          <table><tbody><tr><td>编号</td><td>145.0</td></tr><tr><td>经销商代码</td><td>M18571</td></tr><tr><td>经销商简称</td><td>重庆万事新汽车销售服务有限公司</td></tr><tr><td>区域</td><td>西区</td></tr><tr><td>服务区域经理</td><td>孔立刚</td></tr><tr><td>新保出单</td><td>0</td></tr><tr><td>续保出单</td><td>0</td></tr><tr><td>续保录单</td><td>165</td></tr><tr><td>续保汇总</td><td>165</td></tr><tr><td>忠诚用户</td><td>4070</td></tr><tr><td>月续保率</td><td>0.48648648648648646</td></tr></tbody></table>
+        </div>
+        <div>
+          <h3>客诉/线索</h3>
+          <ul>
+            <li>客诉/线索总数：<b>5</b></li>
+            <li>未关闭：<b>0</b></li>
+            <li>已关闭：<b>5</b></li>
+            <li>超时时长（处理）&gt;0：<b>0</b></li>
+          </ul>
+          <h3>CSI 自主调研</h3>
+          <table><tbody><tr><td>经销商名称</td><td>重庆万事新汽车销售服务有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>148</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>2</td></tr><tr><td>参与率</td><td>1.35%</td></tr><tr><td>满意客户数</td><td>2</td></tr><tr><td>满意率</td><td>100.00%</td></tr></tbody></table>
+          <h4>不满意客户</h4>
+          （本店无不满意客户）
+        </div>
+      </div>
+    </section>
+    
+    <section class='card'>
+      <h2>西藏鼎恒</h2>
+      <div class='grid'>
+        <div>
+          <h3>经营（日常）</h3>
+          <table><tbody><tr><td>进店台次</td><td>0.0</td></tr><tr><td>台次达成率</td><td>0.0</td></tr><tr><td>事故单车</td><td>0.0</td></tr></tbody></table>
+          <h3>保险/平台线索</h3>
+          <table><tbody><tr><td>编号</td><td>141.0</td></tr><tr><td>经销商代码</td><td>M18912</td></tr><tr><td>经销商简称</td><td>西藏鼎恒实业有限公司</td></tr><tr><td>区域</td><td>西区</td></tr><tr><td>服务区域经理</td><td>孔立刚</td></tr><tr><td>新保出单</td><td>0</td></tr><tr><td>续保出单</td><td>0</td></tr><tr><td>续保录单</td><td>0</td></tr><tr><td>续保汇总</td><td>0</td></tr><tr><td>忠诚用户</td><td>163</td></tr><tr><td>月续保率</td><td>0.0</td></tr></tbody></table>
+        </div>
+        <div>
+          <h3>客诉/线索</h3>
+          <ul>
+            <li>客诉/线索总数：<b>5</b></li>
+            <li>未关闭：<b>1</b></li>
+            <li>已关闭：<b>4</b></li>
+            <li>超时时长（处理）&gt;0：<b>1</b></li>
+          </ul>
+          <h3>CSI 自主调研</h3>
+          <table><tbody><tr><td>经销商名称</td><td>西藏鼎恒实业有限公司</td></tr><tr><td>本月维修合同数（3月1日-3月8日）</td><td>0</td></tr><tr><td>评价工单结算范围</td><td>2月1日-3月8日</td></tr><tr><td>直评日期范围</td><td>3月1日-3月10日</td></tr><tr><td>评价客户数</td><td>0</td></tr><tr><td>参与率</td><td>0.00%</td></tr><tr><td>满意客户数</td><td>0</td></tr><tr><td>满意率</td><td>0.00%</td></tr></tbody></table>
+          <h4>不满意客户</h4>
+          （本店无不满意客户）
+        </div>
+      </div>
+    </section>
+    
+</div>
+<script>
+new Chart(document.getElementById('leadChart'),{type:'bar',data:{labels:["\u91cd\u5e86\u91d1\u56e2", "\u91cd\u5e86\u701a\u8fbe", "\u91cd\u5e86\u94f6\u9a6c", "\u91cd\u5e86\u4e07\u4e8b\u65b0", "\u897f\u85cf\u9f0e\u6052"],datasets:[{label:'已关闭',data:[2, 1, 6, 5, 4]},{label:'未关闭',data:[0, 0, 0, 0, 1]},{label:'超时>0',data:[0, 0, 0, 0, 1]}]}});
+new Chart(document.getElementById('csiChart'),{type:'line',data:{labels:["\u91cd\u5e86\u91d1\u56e2", "\u91cd\u5e86\u701a\u8fbe", "\u91cd\u5e86\u94f6\u9a6c", "\u91cd\u5e86\u4e07\u4e8b\u65b0", "\u897f\u85cf\u9f0e\u6052"],datasets:[{label:'CSI参与率(%)',data:[4.29, 33.33, 18.18, 1.35, 0.0]}]}});
+</script></body></html>
