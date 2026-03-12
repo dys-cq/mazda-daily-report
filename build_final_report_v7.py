@@ -25,6 +25,8 @@ files=os.listdir(daily)
 
 lead_file=next((os.path.join(daily,f) for f in files if '线索' in f or '客诉' in f), None)
 csi_file=next((os.path.join(daily,f) for f in files if f.lower().startswith('csi')), None)
+# 保险/平台线索（跳过临时文件~$）
+platform_file=next((os.path.join(daily,f) for f in files if ('平台' in f or 'ƽ' in f) and not f.startswith('~$')), None)
 
 # lead
 lead_df=None
@@ -50,6 +52,30 @@ if lead_df is not None:
         unclosed=max(total-closed,0)
         timeout=(pd.to_numeric(sub[timeout_col].astype(str).str.extract(r'(\d+\.?\d*)', expand=False), errors='coerce').fillna(0)>0).sum()
         lead_stats[st]={'total':int(total),'closed':int(closed),'unclosed':int(unclosed),'timeout':int(timeout)}
+
+# 平台/保险
+platform_df=None
+platform_stats={}
+if platform_file:
+    try:
+        platform_df=pd.read_excel(platform_file, sheet_name=0)
+    except Exception:
+        platform_df=None
+
+if platform_df is not None and not platform_df.empty:
+    # 按经销商名称匹配（列索引 2 通常是经销商名称）
+    name_col_idx=2
+    for st in stores:
+        sub=platform_df[platform_df.iloc[:,name_col_idx].astype(str).str.contains(st, na=False)]
+        if not sub.empty:
+            r=sub.iloc[0]
+            # 提取关键指标
+            m={}
+            for c in r.index[:12]:
+                m[str(c)]=r[c]
+            platform_stats[st]=m
+        else:
+            platform_stats[st]={}
 
 # CSI
 csi_stat=None
@@ -167,11 +193,14 @@ with open(md_out,'w',encoding='utf-8') as f:
 cards=[]
 for st in stores:
     bm=biz_metrics.get(st,{})
+    pm=platform_stats.get(st,{})
     ls=lead_stats.get(st,{'total':0,'closed':0,'unclosed':0,'timeout':0})
     cs=csi_stats.get(st,{})
     bad=bad_lists.get(st,[])
 
     biz_rows=''.join([f"<tr><td>{html.escape(str(k))}</td><td>{html.escape(str(v))}</td></tr>" for k,v in bm.items() if v is not None and str(v)!='nan']) or '<tr><td colspan="2">（无经营数据）</td></tr>'
+
+    plat_rows=''.join([f"<tr><td>{html.escape(str(k))}</td><td>{html.escape(str(v))}</td></tr>" for k,v in pm.items() if v is not None and str(v)!='nan']) if pm else '<tr><td colspan="2">（无平台数据）</td></tr>'
 
     csi_rows=''.join([
         f"<tr><td>经销商名称</td><td>{html.escape(str(cs.get('经销商名称','')))}</td></tr>",
@@ -197,6 +226,8 @@ for st in stores:
         <div>
           <h3>经营（日常）</h3>
           <table><tbody>{biz_rows}</tbody></table>
+          <h3>保险/平台线索</h3>
+          <table><tbody>{plat_rows}</tbody></table>
         </div>
         <div>
           <h3>客诉/线索</h3>
