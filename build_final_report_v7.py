@@ -1,4 +1,4 @@
-import os, pandas as pd, json, shutil, html
+import os, pandas as pd, json, shutil, html, glob
 from datetime import datetime
 
 stores = ['重庆金团','重庆瀚达','重庆银马','重庆万事新','西藏鼎恒']
@@ -195,6 +195,8 @@ if csi_bad is not None and not csi_bad.empty and csi_bad.shape[1] >= 4:
 # biz minimal
 biz_metrics={}
 biz_csv='C:/Users/Administrator/.openclaw/workspace/sheet_3_3月mazda.csv'
+biz_detail_csv=glob.glob('sheet_2*.csv')[0] if glob.glob('sheet_2*.csv') else None
+biz_detail_df=pd.read_csv(biz_detail_csv) if biz_detail_csv else None
 if os.path.exists(biz_csv):
     biz_df=pd.read_csv(biz_csv)
     for st in stores:
@@ -227,6 +229,13 @@ if os.path.exists(biz_csv):
             deal_count = float(r.iloc[93]) if pd.notna(r.iloc[93]) else 1
             accident_count = float(r.iloc[79]) if pd.notna(r.iloc[79]) else 1
             
+            # 从零附件明细获取指标
+            detail_row=None
+            if biz_detail_df is not None:
+                detail_match=biz_detail_df[biz_detail_df.iloc[:,0].astype(str)==code]
+                if not detail_match.empty:
+                    detail_row=detail_match.iloc[0]
+            
             m={
                 '服务总收入': int(r.iloc[4]) if pd.notna(r.iloc[4]) else None,
                 '零件总收入': int(r.iloc[5]) if pd.notna(r.iloc[5]) else None,
@@ -235,6 +244,13 @@ if os.path.exists(biz_csv):
                 '台次达成率': fmt_pct(r.iloc[158]) if pd.notna(r.iloc[158]) else None,
                 '机油单车': int(oil_value / deal_count) if deal_count > 0 else None,
                 '事故单车': int(accident_value / accident_count) if accident_count > 0 else None,
+                # 零附件指标
+                '当月零附件目标': int(detail_row.iloc[9]) if detail_row is not None and len(detail_row)>9 and pd.notna(detail_row.iloc[9]) else None,
+                '当月零附件达成': int(detail_row.iloc[10]) if detail_row is not None and len(detail_row)>10 and pd.notna(detail_row.iloc[10]) else None,
+                '当月达成率': fmt_pct(detail_row.iloc[11]) if detail_row is not None and len(detail_row)>11 else None,
+                '当季度零附件目标': int(detail_row.iloc[12]) if detail_row is not None and len(detail_row)>12 and pd.notna(detail_row.iloc[12]) else None,
+                '当季度零附件达成': int(detail_row.iloc[13]) if detail_row is not None and len(detail_row)>13 and pd.notna(detail_row.iloc[13]) else None,
+                '当季度达成率': fmt_pct(detail_row.iloc[14]) if detail_row is not None and len(detail_row)>14 else None,
             }
         biz_metrics[st]=m
 
