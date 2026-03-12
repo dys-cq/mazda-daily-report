@@ -112,9 +112,8 @@ for st in stores:
                 if label=='忠诚用户' and idx_m==len(month_sheets)-1:
                     last_month_loyal_users=int(float(raw)) if pd.notna(raw) else None
         
-        # 门店维度信息
-        if '服务区域经理' not in vals:
-            vals['服务区域经理']=r.iloc[4] if len(df.columns)>4 else ''
+        # 门店维度信息（不再显示服务区域经理）
+        pass
     
     # 参考续保率 = 当季度续保汇总累加 / 最后一个月忠诚用户
     vals['当季度续保汇总累加']=quarter_renew_sum
@@ -222,14 +221,20 @@ if os.path.exists(biz_csv):
                 except Exception:
                     return str(val)
 
+            # 计算机油单车和事故单车
+            oil_value = float(r.iloc[20]) if pd.notna(r.iloc[20]) else 0
+            accident_value = float(r.iloc[11]) if pd.notna(r.iloc[11]) else 0
+            deal_count = float(r.iloc[93]) if pd.notna(r.iloc[93]) else 1
+            accident_count = float(r.iloc[79]) if pd.notna(r.iloc[79]) else 1
+            
             m={
                 '服务总收入': int(r.iloc[4]) if pd.notna(r.iloc[4]) else None,
                 '零件总收入': int(r.iloc[5]) if pd.notna(r.iloc[5]) else None,
                 '工时总收入': int(r.iloc[6]) if pd.notna(r.iloc[6]) else None,
                 '进店台次': int(r.iloc[93]) if pd.notna(r.iloc[93]) else None,
                 '台次达成率': fmt_pct(r.iloc[158]) if pd.notna(r.iloc[158]) else None,
-                '机油单车': int(r.iloc[70]) if pd.notna(r.iloc[70]) else None,
-                '事故单车': int(r.iloc[71]) if pd.notna(r.iloc[71]) else None,
+                '机油单车': int(oil_value / deal_count) if deal_count > 0 else None,
+                '事故单车': int(accident_value / accident_count) if accident_count > 0 else None,
             }
         biz_metrics[st]=m
 
