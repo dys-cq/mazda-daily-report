@@ -161,13 +161,26 @@ if os.path.exists(biz_csv):
                     if any(k in str(c) for k in keys):
                         return r[c]
                 return None
+            # 辅助函数：百分比格式化
+            def fmt_pct(val):
+                if val is None or str(val)=='nan':
+                    return None
+                try:
+                    f=float(val)
+                    if 0 <= f <= 1:
+                        return f"{f*100:.2f}%"
+                    return f"{f:.2f}%"
+                except Exception:
+                    return str(val)
+
             m={
                 '服务总收入': find_any(['服务总']),
                 '零件总收入': find_any(['零件总']),
                 '工时总收入': find_any(['工时总']),
                 '进店台次': find_any(['进店','台']),
-                '零件达成率': find_any(['零件','达成']),
-                '台次达成率': find_any(['台次','达成']),
+                '零件达成率': fmt_pct(find_any(['零件','达成'])),
+                '台次达成率': fmt_pct(find_any(['台次','达成'])),
+                '忠诚率': fmt_pct(find_any(['忠诚'])),
                 '机油单车': find_any(['机油','单车']),
                 '事故单车': find_any(['事故','单车']),
             }
