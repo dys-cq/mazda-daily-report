@@ -1,33 +1,22 @@
 Param(
-  [string]$BaseDir = "daily-results"
+  [string]$BaseDir = "daily-results",
+  [string]$Date = ""
 )
 
 $ErrorActionPreference = "Stop"
 
-$today = Get-Date -Format "yyyy-MM-dd"
-$dayDir = Join-Path $BaseDir $today
-$dirs = @("original", "rewrite", "skills", "reports", "logs")
-
-New-Item -ItemType Directory -Path $dayDir -Force | Out-Null
-foreach ($d in $dirs) {
-  New-Item -ItemType Directory -Path (Join-Path $dayDir $d) -Force | Out-Null
+if ([string]::IsNullOrWhiteSpace($Date)) {
+  $Date = Get-Date -Format "yyyy-MM-dd"
 }
 
-$startLog = Join-Path $dayDir "logs/run-start.log"
-$endLog = Join-Path $dayDir "logs/run-end.log"
-$summary = Join-Path $dayDir "reports/daily-summary.md"
+$dayDir = Join-Path $BaseDir $Date
+$logDir = Join-Path $dayDir "logs"
+New-Item -ItemType Directory -Path $logDir -Force | Out-Null
+$runLog = Join-Path $logDir "pipeline-run.log"
 
-"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] run start" | Out-File -FilePath $startLog -Encoding utf8 -Append
+"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] nightly wrapper start" | Out-File -FilePath $runLog -Encoding utf8 -Append
+uv run python automation/nightly_content_pipeline.py --date $Date --base-dir $BaseDir --max-articles 4
+$exitCode = $LASTEXITCODE
+"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] nightly wrapper end, code=$exitCode" | Out-File -FilePath $runLog -Encoding utf8 -Append
 
-if (-not (Test-Path $summary)) {
-  $lines = @(
-    "# Daily Summary ($today)",
-    "",
-    "- Status: scaffold initialized.",
-    "- Note: nightly collection/rewrite/skill steps pending integration."
-  )
-  $lines -join "`r`n" | Out-File -FilePath $summary -Encoding utf8
-}
-
-"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] run end" | Out-File -FilePath $endLog -Encoding utf8 -Append
-Write-Output "Nightly scaffold ready: $dayDir"
+exit $exitCode

@@ -1,4 +1,11 @@
-﻿# Daily Summary (2026-03-12)
+# Daily Summary (2026-03-12)
 
-- Status: scaffold initialized.
-- Note: nightly collection/rewrite/skill steps pending integration.
+- 原文产出：9
+- 改写产出：9
+- Skill 产出：2
+- 失败链接：0
+
+## 今日高价值动作
+- 完成双文件沉淀（original + wechat）。
+- 完成至少 1 个可执行 Skill 草案。
+- 形成次日可复用来源池。
