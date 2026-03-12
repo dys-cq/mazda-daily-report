@@ -74,8 +74,8 @@ for st in stores:
     quarter_renew_sum=0
     last_month_loyal_users=None
     
-    # 按月份顺序解析
-    month_sheets=[(sn,df) for sn,df in platform_sheets if any(ch.isdigit() for ch in str(sn))]
+    # 按月份顺序解析（排除 Sheet2 等空表）
+    month_sheets=[(sn,df) for sn,df in platform_sheets if str(sn).startswith(('1','2','3','4','5','6','7','8','9','10','11','12'))]
     if not month_sheets:
         month_sheets=platform_sheets
     
@@ -113,18 +113,16 @@ for st in stores:
                     last_month_loyal_users=int(float(raw)) if pd.notna(raw) else None
         
         # 门店维度信息
-        if '经销商简称' not in vals:
-            vals['经销商简称']=r.iloc[2] if len(df.columns)>2 else ''
-            vals['区域']=r.iloc[3] if len(df.columns)>3 else ''
+        if '服务区域经理' not in vals:
             vals['服务区域经理']=r.iloc[4] if len(df.columns)>4 else ''
     
     # 参考续保率 = 当季度续保汇总累加 / 最后一个月忠诚用户
+    vals['当季度续保汇总累加']=quarter_renew_sum
     if last_month_loyal_users and last_month_loyal_users!=0:
         ref_rate=quarter_renew_sum/last_month_loyal_users
         vals['参考续保率']=f"{ref_rate*100:.2f}%" if ref_rate<=1 else f"{ref_rate:.2f}%"
     else:
         vals['参考续保率']='-'
-    vals['当季度续保汇总累加']=quarter_renew_sum
     
     platform_stats[st]=vals
 
@@ -229,9 +227,7 @@ if os.path.exists(biz_csv):
                 '零件总收入': find_any(['零件总']),
                 '工时总收入': find_any(['工时总']),
                 '进店台次': find_any(['进店','台']),
-                '零件达成率': fmt_pct(find_any(['零件','达成'])),
                 '台次达成率': fmt_pct(find_any(['台次','达成'])),
-                '忠诚率': fmt_pct(find_any(['忠诚'])),
                 '机油单车': find_any(['机油','单车']),
                 '事故单车': find_any(['事故','单车']),
             }
