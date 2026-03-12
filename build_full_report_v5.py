@@ -145,34 +145,56 @@ for store in stores:
                     rng=m.group(2).strip()
                     header_map[field]=rng
 
-            keep={}
+            # 统计表第一行通常是“字段名行”（经销商代码/经销商名称/本月维修合同...）
+            # 先把当前门店行映射成“字段名 -> 数值”，避免列标题与数据错位导致取值错误
+            label_row=None
+            code_col_guess=pick_col(csi_stat.columns, ['统计周期','经销商代码']) or csi_stat.columns[0]
+            label_rows=csi_stat[csi_stat[code_col_guess].astype(str).str.contains('经销商代码', na=False)]
+            if not label_rows.empty:
+                label_row=label_rows.iloc[0]
+            else:
+                label_row=csi_stat.iloc[0]
+
+            field_value={}
             for k in r.index:
                 key=str(k)
                 val=r[k]
-                # 把“字段：范围”拆开，避免把大区值（如西区）错当成结算范围展示
+
+                # 列标题（常含“字段:时间范围”）
                 mkey=re.match(r'^(.*?)[：:]\s*(.*)$', key)
                 key_base=(mkey.group(1).strip() if mkey else key)
-                key_range=(mkey.group(2).strip() if mkey else '')
+                field_value[key_base]=val
 
-                # 仅保留核心 CSI 指标字段
-                if any(x in key_base for x in ['经销商名称','评价工单结算范围','本月维修合同','评价客户数','参与率','满意客户数','满意率']):
-                    display_key=key_base
-                    display_val=val
+                # 第一行字段名（如：经销商名称/本月维修合同/评价客户数...）
+                fld=str(label_row.get(k, '')).strip()
+                if fld and fld.lower() != 'nan':
+                    field_value[fld]=val
 
-                    if key_base=='评价工单结算范围':
-                        # 按需求：此项应展示“结算时间范围”，而不是行内的大区值（西区）
-                        display_val=key_range or header_map.get('评价工单结算范围', val)
+            keep={}
+            # 基础字段
+            if '经销商名称' in field_value:
+                keep['经销商名称']=field_value['经销商名称']
 
-                    if key_base in ['本月维修合同','直评日期']:
-                        rng=key_range or header_map.get(key_base)
-                        if rng:
-                            display_key=f"{key_base}（{rng}）"
+            # 本月维修合同数（新增）
+            if '本月维修合同' in field_value:
+                rng=header_map.get('本月维修合同')
+                kname='本月维修合同数' + (f'（{rng}）' if rng else '')
+                keep[kname]=field_value['本月维修合同']
 
-                    keep[display_key]=display_val
+            # 评价工单结算范围：必须展示时间范围，而非大区（如“西区”）
+            if '评价工单结算范围' in header_map:
+                keep['评价工单结算范围']=header_map['评价工单结算范围']
+            elif '评价工单结算范围' in field_value:
+                keep['评价工单结算范围']=field_value['评价工单结算范围']
 
-            # 新增：直评日期范围（来自统计表头“直评日期：xxxx-xxxx”）
+            # 直评日期范围（来自统计表头）
             if '直评日期' in header_map:
                 keep['直评日期范围']=header_map['直评日期']
+
+            # 其余 CSI 指标
+            for fld in ['评价客户数','参与率','满意客户数','满意率']:
+                if fld in field_value:
+                    keep[fld]=field_value[fld]
 
             # 若上面未提取到，按关键词兜底
             if not keep:
