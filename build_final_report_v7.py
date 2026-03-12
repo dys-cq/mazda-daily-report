@@ -19,7 +19,10 @@ for sub in os.scandir(base):
 if not daily:
     raise SystemExit('未找到 每日分析 目录')
 
-run_folder = os.path.join(daily, '2026-03-11-重新统计')
+# 自动创建今日任务文件夹
+from datetime import datetime
+today = datetime.now().strftime('%Y-%m-%d')
+run_folder = os.path.join(daily, f'{today}-统计')
 os.makedirs(run_folder, exist_ok=True)
 # 从 run_folder 查找文件（CSV 文件导出到这里）
 files=os.listdir(run_folder)
@@ -89,11 +92,12 @@ for st in stores:
         r=sub.iloc[0]
         
         month_prefix=f"{sn}-"
-        field_map=[(5,'新保出单'),(6,'续保出单'),(7,'续保录单'),(8,'续保汇总'),(9,'忠诚用户'),(10,'忠诚率')]
+        # 忠诚率 → 续保率
+        field_map=[(5,'新保出单'),(6,'续保出单'),(7,'续保录单'),(8,'续保汇总'),(9,'忠诚用户'),(10,'续保率')]
         for fidx, label in field_map:
             if len(df.columns)>fidx:
                 raw=r.iloc[fidx]
-                if label=='忠诚率':
+                if label=='续保率':
                     try:
                         f=float(raw)
                         val=f"{f*100:.2f}%" if f<=1 else f"{f:.2f}%"
