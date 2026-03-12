@@ -170,6 +170,10 @@ for store in stores:
 
                     keep[display_key]=display_val
 
+            # 新增：直评日期范围（来自统计表头“直评日期：xxxx-xxxx”）
+            if '直评日期' in header_map:
+                keep['直评日期范围']=header_map['直评日期']
+
             # 若上面未提取到，按关键词兜底
             if not keep:
                 for k in r.index:
