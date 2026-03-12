@@ -53,29 +53,80 @@ if lead_df is not None:
         timeout=(pd.to_numeric(sub[timeout_col].astype(str).str.extract(r'(\d+\.?\d*)', expand=False), errors='coerce').fillna(0)>0).sum()
         lead_stats[st]={'total':int(total),'closed':int(closed),'unclosed':int(unclosed),'timeout':int(timeout)}
 
-# 平台/保险
-platform_df=None
-platform_stats={}
+# 平台/保险 - 解析多个月份 sheet
+platform_sheets=[]
 if platform_file:
     try:
-        platform_df=pd.read_excel(platform_file, sheet_name=0)
+        xl=pd.ExcelFile(platform_file)
+        for sn in xl.sheet_names:
+            try:
+                df=pd.read_excel(platform_file, sheet_name=sn)
+                if df is not None and not df.empty and df.shape[1]>=11:
+                    platform_sheets.append((sn, df))
+            except Exception:
+                continue
     except Exception:
-        platform_df=None
+        pass
 
-if platform_df is not None and not platform_df.empty:
-    # 按经销商名称匹配（列索引 2 通常是经销商名称）
-    name_col_idx=2
-    for st in stores:
-        sub=platform_df[platform_df.iloc[:,name_col_idx].astype(str).str.contains(st, na=False)]
-        if not sub.empty:
-            r=sub.iloc[0]
-            # 提取关键指标
-            m={}
-            for c in r.index[:12]:
-                m[str(c)]=r[c]
-            platform_stats[st]=m
-        else:
-            platform_stats[st]={}
+platform_stats={}
+for st in stores:
+    vals={}
+    quarter_renew_sum=0
+    last_month_loyal_users=None
+    
+    # 按月份顺序解析
+    month_sheets=[(sn,df) for sn,df in platform_sheets if any(ch.isdigit() for ch in str(sn))]
+    if not month_sheets:
+        month_sheets=platform_sheets
+    
+    for idx_m, (sn, df) in enumerate(month_sheets):
+        # 列结构：[0 编号，1 经销商代码，2 经销商名称，3 区域，4 经理，5 新保出单，6 续保出单，7 续保录单，8 续保汇总，9 忠诚用户，10 忠诚率]
+        name_col=2 if len(df.columns)>2 else 0
+        sub=df[df.iloc[:,name_col].astype(str).str.contains(st, na=False)]
+        if sub.empty:
+            continue
+        r=sub.iloc[0]
+        
+        month_prefix=f"{sn}-"
+        field_map=[(5,'新保出单'),(6,'续保出单'),(7,'续保录单'),(8,'续保汇总'),(9,'忠诚用户'),(10,'忠诚率')]
+        for fidx, label in field_map:
+            if len(df.columns)>fidx:
+                raw=r.iloc[fidx]
+                if label=='忠诚率':
+                    try:
+                        f=float(raw)
+                        val=f"{f*100:.2f}%" if f<=1 else f"{f:.2f}%"
+                    except:
+                        val=str(raw)
+                else:
+                    val=int(raw) if pd.notna(raw) else 0
+                vals[month_prefix+label]=val
+                
+                # 累计季度续保汇总
+                if label=='续保汇总':
+                    try:
+                        quarter_renew_sum+=int(float(raw)) if pd.notna(raw) else 0
+                    except:
+                        pass
+                # 取最后一个月的忠诚用户
+                if label=='忠诚用户' and idx_m==len(month_sheets)-1:
+                    last_month_loyal_users=int(float(raw)) if pd.notna(raw) else None
+        
+        # 门店维度信息
+        if '经销商简称' not in vals:
+            vals['经销商简称']=r.iloc[2] if len(df.columns)>2 else ''
+            vals['区域']=r.iloc[3] if len(df.columns)>3 else ''
+            vals['服务区域经理']=r.iloc[4] if len(df.columns)>4 else ''
+    
+    # 参考续保率 = 当季度续保汇总累加 / 最后一个月忠诚用户
+    if last_month_loyal_users and last_month_loyal_users!=0:
+        ref_rate=quarter_renew_sum/last_month_loyal_users
+        vals['参考续保率']=f"{ref_rate*100:.2f}%" if ref_rate<=1 else f"{ref_rate:.2f}%"
+    else:
+        vals['参考续保率']='-'
+    vals['当季度续保汇总累加']=quarter_renew_sum
+    
+    platform_stats[st]=vals
 
 # CSI
 csi_stat=None
