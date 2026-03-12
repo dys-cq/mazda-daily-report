@@ -223,13 +223,13 @@ if os.path.exists(biz_csv):
                     return str(val)
 
             m={
-                '服务总收入': find_any(['服务总']),
-                '零件总收入': find_any(['零件总']),
-                '工时总收入': find_any(['工时总']),
-                '进店台次': find_any(['进店','台']),
-                '台次达成率': fmt_pct(find_any(['台次','达成'])),
-                '机油单车': find_any(['机油','单车']),
-                '事故单车': find_any(['事故','单车']),
+                '服务总收入': int(r.iloc[4]) if pd.notna(r.iloc[4]) else None,
+                '零件总收入': int(r.iloc[5]) if pd.notna(r.iloc[5]) else None,
+                '工时总收入': int(r.iloc[6]) if pd.notna(r.iloc[6]) else None,
+                '进店台次': int(r.iloc[93]) if pd.notna(r.iloc[93]) else None,
+                '台次达成率': fmt_pct(r.iloc[158]) if pd.notna(r.iloc[158]) else None,
+                '机油单车': int(r.iloc[70]) if pd.notna(r.iloc[70]) else None,
+                '事故单车': int(r.iloc[71]) if pd.notna(r.iloc[71]) else None,
             }
         biz_metrics[st]=m
 
