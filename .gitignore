@@ -9,7 +9,8 @@ env/
 # Generated reports (output, not source)
 *.html
 *.csv
-*.md
+KPI 日报_*.md
+KPI 日报_*.html
 
 # OS
 .DS_Store
