@@ -376,12 +376,17 @@ def parse_biz(biz_df, biz_detail_df=None):
         oil_per_car = dget(17)
         accident_per_car = dget(20)
 
+        # 进店台次：取自综合日报"零件 - 经销商明细"sheet 的"工单数"列（索引 21）
+        # 台次达成率：从主表查找包含"台次"和"达成"的列
+        repair_order_count = dget(21)  # 工单数
+        visit_rate = find_any(['台次','达成'])  # 从主表查找台次达成率
+        
         out[st] = {
             '服务总收入': format_int(find_any(['服务总'])),
             '零件总收入': format_int(find_any(['零件总'])),
             '工时总收入': format_int(find_any(['工时总'])),
-            '进店台次': format_int(find_any(['进店','台'])),
-            '台次达成率': format_percent(find_any(['台次','达成'])),
+            '进店台次（工单数）': format_int(repair_order_count if repair_order_count is not None else find_any(['进店','台','工单'])),
+            '台次达成率': format_percent(visit_rate),
             '机油单车': format_int(oil_per_car if oil_per_car is not None else find_any(['机油','单车'])),
             '事故单车': format_int(accident_per_car if accident_per_car is not None else find_any(['事故','单车'])),
             '当月保养台次': format_int(month_maint_count),
@@ -485,7 +490,7 @@ BIZ_DISPLAY_ORDER = [
     '服务总收入',
     '零件总收入',
     '工时总收入',
-    '进店台次',
+    '进店台次（工单数）',
     '台次达成率',
     '机油单车',
     '事故单车',
