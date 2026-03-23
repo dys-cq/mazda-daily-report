@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+test_*.py
+*_test.py
+*_test.json
+test_*.json
+验证*.py
+调试*.py
+检查*.py
+查看*.py
+展示*.py
+解析*.py
+提取*.py
+测试*.py
+
+# Output files
+*.json
+!package.json
+*.md
+!SKILL.md
+!README.md
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+stderr.txt
+
+# Media files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.avi
+
+# Large data files
+*.xlsx
+*.csv
+*.pdf
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
