@@ -111,11 +111,26 @@ def _looks_like_random_or_unusable_name(name: str) -> bool:
 def infer_product_name_from_filename(file_path: str, original_filename: str | None = None) -> str | None:
     raw_name = original_filename.strip() if original_filename and original_filename.strip() else Path(file_path).name
     stem = Path(raw_name).stem.strip()
+
+    candidate = re.sub(r"[_\-]+", "", stem)
+    candidate = re.sub(r"^(测试样例|测试样本|测试文件|测试文档|测试|样例|样本|示例)+", "", candidate)
+    candidate = re.sub(r"^[A-Za-z]{1,6}\d{2,10}", "", candidate)
+    candidate = re.sub(r"^(第?[A-Za-z0-9一二三四五六七八九十]+版)", "", candidate)
+    candidate = candidate.strip()
+
+    suffix_match = re.search(
+        r"([\u4e00-\u9fffA-Za-z0-9·（）()]{2,80}(?:洁面乳|洁面霜|洗面奶|面膜|精华液|精华水|爽肤水|乳液|面霜|眼霜|防晒霜|洗发水|沐浴露))",
+        candidate,
+    )
+    if suffix_match:
+        normalized = re.sub(r"\s+", "", suffix_match.group(1)).strip()
+        if normalized and not _looks_like_random_or_unusable_name(normalized):
+            return normalized
+
     chinese_chunks = re.findall(r"[\u4e00-\u9fff]+", stem)
     if chinese_chunks:
         candidate = "".join(chinese_chunks).strip()
-        candidate = re.sub(r"^(测试样例|测试样本|样例|示例)+", "", candidate)
-        candidate = re.sub(r"^[A-Za-z]{1,5}\d{2,8}", "", candidate)
+        candidate = re.sub(r"^(测试样例|测试样本|测试文件|测试文档|测试|样例|样本|示例)+", "", candidate)
         candidate = candidate.strip()
         if candidate and not _looks_like_random_or_unusable_name(candidate):
             return candidate

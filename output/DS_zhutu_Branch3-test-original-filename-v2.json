@@ -1,0 +1,84 @@
+{
+  "input": {
+    "file": "C:\\Users\\Administrator\\.openclaw\\media\\outbound\\86959b74-01e7-488a-967e-5708718c5999.docx",
+    "workflow_id": "7619646482521538606",
+    "product_name": "测试样例 CL0142酷洛菲黑松露润浸洁面乳",
+    "product_name_source": "filename",
+    "product_information_length": 1046,
+    "sellpoints_length": 111
+  },
+  "result": {
+    "status_code": 200,
+    "headers": {
+      "Server": "volc-dcdn",
+      "Content-Type": "text/event-stream; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Date": "Tue, 24 Mar 2026 08:44:22 GMT",
+      "X-Tt-Logid": "20260324164352C21C50FC8E1A38665BE4",
+      "Cache-Control": "no-cache",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "server-timing": "inner; dur=30061, cdn-cache;desc=MISS, origin;dur=30089, edge;dur=0",
+      "x-tt-trace-host": "01a3651e641e793d68479addc31a18753ff869258a10ca8ff9022a898a139c8840360c83d4fb57651182ae7892d7e993124e07ceddb89f4fa7e55172ac5fee6f648b8525e7676d06b2b5f35820c49517b5b0d7c1049f1115dad7bbbdba2e24f5c4ea3122dbf030f0d97a6913af06c22f89",
+      "x-tt-trace-tag": "id=5",
+      "x-tt-trace-id": "00-1f03bfbc03010e45ffe4782f07840000-1f03bfbc03010e45-01",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "false",
+      "Access-Control-Allow-Methods": "POST,GET,PUT,DELETE,OPTIONS",
+      "Access-Control-Allow-Headers": "Origin,Content-Type,Content-Length,Authorization,x-tt-env,x-use-ppe,x-use-boe,X-Coze-Connector-ID,X-Coze-Client-User-Agent,X-Coze-Resource-Entity,rpc-persist-mock-traffic-enable,open-nginx",
+      "via": "n157-118-089.cqmpct.Creative",
+      "x-request-ip": "106.88.210.116",
+      "x-dsa-trace-id": "1774341832b8e6ca9db8b8410062ed5002afc5cdcc",
+      "X-Dsa-Origin-Status": "200"
+    },
+    "body_text": "id: 0\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 1\nevent: Message\ndata: {\"content\":\"{\\\"zhutu_copy\\\":\\\"{\\\\\\\"主图1\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露润养洁面 洗后不紧绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"黑松露洁面产品主体大图展示，柔化背景突出产品形态，建立产品认知吸引点击\\\\\\\"},\\\\\\\"主图2\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"缓解清洁后干燥与紧绷感\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"痛点对位展示，突出本品解决清洁后紧绷问题的核心优势\\\\\\\"},\\\\\\\"主图3\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露润浸 享受舒润洁面\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"搭配黑松露原料展示本品洁面膏体，凸显成分带来的润泽质感\\\\\\\"},\\\\\\\"主图4\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"润感充足 不拔不紧绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"亚洲女性浴室日常洁面场景，展示使用后的舒适肤感，让用户感知产品体验\\\\\\\"},\\\\\\\"主图5\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"纯白底背景下展示完整的黑松露洁面产品实物，符合平台商品白底图规范\\\\\\\"}}\\\"}\",\"content_type\":\"text\",\"usage\":{\"token_count\":4977,\"output_count\":2066,\"input_count\":2911},\"node_is_finish\":true,\"node_seq_id\":\"0\",\"node_title\":\"End\",\"node_id\":\"900001\",\"node_execute_uuid\":\"\",\"node_type\":\"End\"}\n\nid: 2\nevent: Done\ndata: {\"node_execute_uuid\":\"\",\"debug_url\":\"https://www.coze.cn/work_flow?execute_id=7620740136208842761\\u0026space_id=7571647240440643626\\u0026workflow_id=7619646482521538606\\u0026execute_mode=2\"}\n\n",
+    "body_json": null,
+    "stream": {
+      "events": [
+        {
+          "event": "PING",
+          "data": [
+            {
+              "content": "{}",
+              "node_execute_uuid": ""
+            }
+          ]
+        },
+        {
+          "event": "Message",
+          "data": [
+            {
+              "content": "{\"zhutu_copy\":\"{\\\"主图1\\\":{\\\"图上展示文案\\\":\\\"黑松露润养洁面 洗后不紧绷\\\",\\\"模块主要内容\\\":\\\"黑松露洁面产品主体大图展示，柔化背景突出产品形态，建立产品认知吸引点击\\\"},\\\"主图2\\\":{\\\"图上展示文案\\\":\\\"缓解清洁后干燥与紧绷感\\\",\\\"模块主要内容\\\":\\\"痛点对位展示，突出本品解决清洁后紧绷问题的核心优势\\\"},\\\"主图3\\\":{\\\"图上展示文案\\\":\\\"黑松露润浸 享受舒润洁面\\\",\\\"模块主要内容\\\":\\\"搭配黑松露原料展示本品洁面膏体，凸显成分带来的润泽质感\\\"},\\\"主图4\\\":{\\\"图上展示文案\\\":\\\"润感充足 不拔不紧绷\\\",\\\"模块主要内容\\\":\\\"亚洲女性浴室日常洁面场景，展示使用后的舒适肤感，让用户感知产品体验\\\"},\\\"主图5\\\":{\\\"图上展示文案\\\":\\\"\\\",\\\"模块主要内容\\\":\\\"纯白底背景下展示完整的黑松露洁面产品实物，符合平台商品白底图规范\\\"}}\"}",
+              "content_type": "text",
+              "usage": {
+                "token_count": 4977,
+                "output_count": 2066,
+                "input_count": 2911
+              },
+              "node_is_finish": true,
+              "node_seq_id": "0",
+              "node_title": "End",
+              "node_id": "900001",
+              "node_execute_uuid": "",
+              "node_type": "End"
+            }
+          ]
+        },
+        {
+          "event": "Done",
+          "data": [
+            {
+              "node_execute_uuid": "",
+              "debug_url": "https://www.coze.cn/work_flow?execute_id=7620740136208842761&space_id=7571647240440643626&workflow_id=7619646482521538606&execute_mode=2"
+            }
+          ]
+        }
+      ],
+      "parsed_json": {
+        "node_execute_uuid": "",
+        "debug_url": "https://www.coze.cn/work_flow?execute_id=7620740136208842761&space_id=7571647240440643626&workflow_id=7619646482521538606&execute_mode=2"
+      },
+      "raw_text": "id: 0\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 1\nevent: Message\ndata: {\"content\":\"{\\\"zhutu_copy\\\":\\\"{\\\\\\\"主图1\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露润养洁面 洗后不紧绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"黑松露洁面产品主体大图展示，柔化背景突出产品形态，建立产品认知吸引点击\\\\\\\"},\\\\\\\"主图2\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"缓解清洁后干燥与紧绷感\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"痛点对位展示，突出本品解决清洁后紧绷问题的核心优势\\\\\\\"},\\\\\\\"主图3\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露润浸 享受舒润洁面\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"搭配黑松露原料展示本品洁面膏体，凸显成分带来的润泽质感\\\\\\\"},\\\\\\\"主图4\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"润感充足 不拔不紧绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"亚洲女性浴室日常洁面场景，展示使用后的舒适肤感，让用户感知产品体验\\\\\\\"},\\\\\\\"主图5\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"纯白底背景下展示完整的黑松露洁面产品实物，符合平台商品白底图规范\\\\\\\"}}\\\"}\",\"content_type\":\"text\",\"usage\":{\"token_count\":4977,\"output_count\":2066,\"input_count\":2911},\"node_is_finish\":true,\"node_seq_id\":\"0\",\"node_title\":\"End\",\"node_id\":\"900001\",\"node_execute_uuid\":\"\",\"node_type\":\"End\"}\n\nid: 2\nevent: Done\ndata: {\"node_execute_uuid\":\"\",\"debug_url\":\"https://www.coze.cn/work_flow?execute_id=7620740136208842761\\u0026space_id=7571647240440643626\\u0026workflow_id=7619646482521538606\\u0026execute_mode=2\"}\n\n"
+    }
+  }
+}
