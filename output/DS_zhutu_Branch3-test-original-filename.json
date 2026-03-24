@@ -1,0 +1,111 @@
+{
+  "input": {
+    "file": "C:\\Users\\Administrator\\.openclaw\\media\\outbound\\86959b74-01e7-488a-967e-5708718c5999.docx",
+    "workflow_id": "7619646482521538606",
+    "product_name": "测试样例 CL0142酷洛菲黑松露润浸洁面乳",
+    "product_name_source": "filename",
+    "product_information_length": 1046,
+    "sellpoints_length": 111
+  },
+  "result": {
+    "status_code": 200,
+    "headers": {
+      "Server": "volc-dcdn",
+      "Content-Type": "text/event-stream; charset=utf-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Date": "Tue, 24 Mar 2026 08:37:16 GMT",
+      "X-Tt-Logid": "20260324163646D4216DFF9442D3A738E6",
+      "Cache-Control": "no-cache",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "server-timing": "inner; dur=30090, cdn-cache;desc=MISS, origin;dur=30127, edge;dur=0",
+      "x-tt-trace-host": "01a3651e641e793d68479addc31a18753ff86dd209f1a34ba2c48261f3b238379bf0976fad188c68b2b9b737e8ddcaf66de3647fe4dfcb7e430188210b829644de847a2fb98be70e35cde54f7ed4188fa1b7eac406ff760991f844d938431cbab41ec28196f8c6cd6920a83558fed37573",
+      "x-tt-trace-tag": "id=5",
+      "x-tt-trace-id": "00-1efd422c030105e61c27cb1f18ec0000-1efd422c030105e6-01",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "false",
+      "Access-Control-Allow-Methods": "POST,GET,PUT,DELETE,OPTIONS",
+      "Access-Control-Allow-Headers": "Origin,Content-Type,Content-Length,Authorization,x-tt-env,x-use-ppe,x-use-boe,X-Coze-Connector-ID,X-Coze-Client-User-Agent,X-Coze-Resource-Entity,rpc-persist-mock-traffic-enable,open-nginx",
+      "via": "n157-118-084.cqmpct.Creative",
+      "x-request-ip": "106.88.210.116",
+      "x-dsa-trace-id": "1774341406de7bf187d539c1a1490d509c01bbff4b",
+      "X-Dsa-Origin-Status": "200"
+    },
+    "body_text": "id: 0\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 1\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 2\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 3\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 4\nevent: Message\ndata: {\"node_is_finish\":true,\"node_id\":\"900001\",\"node_execute_uuid\":\"\",\"usage\":{\"token_count\":10554,\"output_count\":7645,\"input_count\":2909},\"node_seq_id\":\"0\",\"node_title\":\"End\",\"content\":\"{\\\"zhutu_copy\\\":\\\"{\\\\\\\"主图1\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露浸润洁面 洗后不紧绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"黑松露保湿洁面正装高清展示，干净简约背景突出产品整体视觉，建立产品认知\\\\\\\"},\\\\\\\"主图2\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"缓解清洁后干燥与紧绷感\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"痛点对位展示，对比普通洁面清洁后的紧绷不适感，突出本品解决痛点的优势\\\\\\\"},\\\\\\\"主图3\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露润浸 升级洁面体验\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"黑松露成分搭配产品质地展示，突出产品的差异化体验优势\\\\\\\"},\\\\\\\"主图4\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"温润洁面 舒适不干绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"亚洲女性日常洁面场景，展示使用产品后舒适的肤感状态，让用户直观感知使用体验\\\\\\\"},\\\\\\\"主图5\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"符合平台规范的商品白底展示，仅展示产品正装，纯白无杂质背景\\\\\\\"}}\\\"}\",\"content_type\":\"text\",\"node_type\":\"End\"}\n\nid: 5\nevent: Done\ndata: {\"node_execute_uuid\":\"\",\"debug_url\":\"https://www.coze.cn/work_flow?execute_id=7620738310914244643\\u0026space_id=7571647240440643626\\u0026workflow_id=7619646482521538606\\u0026execute_mode=2\"}\n\n",
+    "body_json": null,
+    "stream": {
+      "events": [
+        {
+          "event": "PING",
+          "data": [
+            {
+              "content": "{}",
+              "node_execute_uuid": ""
+            }
+          ]
+        },
+        {
+          "event": "PING",
+          "data": [
+            {
+              "content": "{}",
+              "node_execute_uuid": ""
+            }
+          ]
+        },
+        {
+          "event": "PING",
+          "data": [
+            {
+              "content": "{}",
+              "node_execute_uuid": ""
+            }
+          ]
+        },
+        {
+          "event": "PING",
+          "data": [
+            {
+              "content": "{}",
+              "node_execute_uuid": ""
+            }
+          ]
+        },
+        {
+          "event": "Message",
+          "data": [
+            {
+              "node_is_finish": true,
+              "node_id": "900001",
+              "node_execute_uuid": "",
+              "usage": {
+                "token_count": 10554,
+                "output_count": 7645,
+                "input_count": 2909
+              },
+              "node_seq_id": "0",
+              "node_title": "End",
+              "content": "{\"zhutu_copy\":\"{\\\"主图1\\\":{\\\"图上展示文案\\\":\\\"黑松露浸润洁面 洗后不紧绷\\\",\\\"模块主要内容\\\":\\\"黑松露保湿洁面正装高清展示，干净简约背景突出产品整体视觉，建立产品认知\\\"},\\\"主图2\\\":{\\\"图上展示文案\\\":\\\"缓解清洁后干燥与紧绷感\\\",\\\"模块主要内容\\\":\\\"痛点对位展示，对比普通洁面清洁后的紧绷不适感，突出本品解决痛点的优势\\\"},\\\"主图3\\\":{\\\"图上展示文案\\\":\\\"黑松露润浸 升级洁面体验\\\",\\\"模块主要内容\\\":\\\"黑松露成分搭配产品质地展示，突出产品的差异化体验优势\\\"},\\\"主图4\\\":{\\\"图上展示文案\\\":\\\"温润洁面 舒适不干绷\\\",\\\"模块主要内容\\\":\\\"亚洲女性日常洁面场景，展示使用产品后舒适的肤感状态，让用户直观感知使用体验\\\"},\\\"主图5\\\":{\\\"图上展示文案\\\":\\\"\\\",\\\"模块主要内容\\\":\\\"符合平台规范的商品白底展示，仅展示产品正装，纯白无杂质背景\\\"}}\"}",
+              "content_type": "text",
+              "node_type": "End"
+            }
+          ]
+        },
+        {
+          "event": "Done",
+          "data": [
+            {
+              "node_execute_uuid": "",
+              "debug_url": "https://www.coze.cn/work_flow?execute_id=7620738310914244643&space_id=7571647240440643626&workflow_id=7619646482521538606&execute_mode=2"
+            }
+          ]
+        }
+      ],
+      "parsed_json": {
+        "node_execute_uuid": "",
+        "debug_url": "https://www.coze.cn/work_flow?execute_id=7620738310914244643&space_id=7571647240440643626&workflow_id=7619646482521538606&execute_mode=2"
+      },
+      "raw_text": "id: 0\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 1\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 2\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 3\nevent: PING\ndata: {\"content\":\"{}\",\"node_execute_uuid\":\"\"}\n\nid: 4\nevent: Message\ndata: {\"node_is_finish\":true,\"node_id\":\"900001\",\"node_execute_uuid\":\"\",\"usage\":{\"token_count\":10554,\"output_count\":7645,\"input_count\":2909},\"node_seq_id\":\"0\",\"node_title\":\"End\",\"content\":\"{\\\"zhutu_copy\\\":\\\"{\\\\\\\"主图1\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露浸润洁面 洗后不紧绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"黑松露保湿洁面正装高清展示，干净简约背景突出产品整体视觉，建立产品认知\\\\\\\"},\\\\\\\"主图2\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"缓解清洁后干燥与紧绷感\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"痛点对位展示，对比普通洁面清洁后的紧绷不适感，突出本品解决痛点的优势\\\\\\\"},\\\\\\\"主图3\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"黑松露润浸 升级洁面体验\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"黑松露成分搭配产品质地展示，突出产品的差异化体验优势\\\\\\\"},\\\\\\\"主图4\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"温润洁面 舒适不干绷\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"亚洲女性日常洁面场景，展示使用产品后舒适的肤感状态，让用户直观感知使用体验\\\\\\\"},\\\\\\\"主图5\\\\\\\":{\\\\\\\"图上展示文案\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"模块主要内容\\\\\\\":\\\\\\\"符合平台规范的商品白底展示，仅展示产品正装，纯白无杂质背景\\\\\\\"}}\\\"}\",\"content_type\":\"text\",\"node_type\":\"End\"}\n\nid: 5\nevent: Done\ndata: {\"node_execute_uuid\":\"\",\"debug_url\":\"https://www.coze.cn/work_flow?execute_id=7620738310914244643\\u0026space_id=7571647240440643626\\u0026workflow_id=7619646482521538606\\u0026execute_mode=2\"}\n\n"
+    }
+  }
+}

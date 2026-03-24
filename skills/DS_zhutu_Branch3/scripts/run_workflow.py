@@ -108,11 +108,15 @@ def _looks_like_random_or_unusable_name(name: str) -> bool:
     return False
 
 
-def infer_product_name_from_filename(file_path: str) -> str | None:
-    stem = Path(file_path).stem.strip()
+def infer_product_name_from_filename(file_path: str, original_filename: str | None = None) -> str | None:
+    raw_name = original_filename.strip() if original_filename and original_filename.strip() else Path(file_path).name
+    stem = Path(raw_name).stem.strip()
     chinese_chunks = re.findall(r"[\u4e00-\u9fff]+", stem)
     if chinese_chunks:
         candidate = "".join(chinese_chunks).strip()
+        candidate = re.sub(r"^(测试样例|测试样本|样例|示例)+", "", candidate)
+        candidate = re.sub(r"^[A-Za-z]{1,5}\d{2,8}", "", candidate)
+        candidate = candidate.strip()
         if candidate and not _looks_like_random_or_unusable_name(candidate):
             return candidate
 
@@ -147,11 +151,11 @@ def infer_product_name_from_content(content: str) -> str | None:
     return None
 
 
-def resolve_product_name(file_path: str, product_information: str, explicit_product_name: str | None) -> tuple[str | None, str]:
+def resolve_product_name(file_path: str, product_information: str, explicit_product_name: str | None, original_filename: str | None = None) -> tuple[str | None, str]:
     if explicit_product_name and explicit_product_name.strip():
         return explicit_product_name.strip(), "explicit"
 
-    from_filename = infer_product_name_from_filename(file_path)
+    from_filename = infer_product_name_from_filename(file_path, original_filename=original_filename)
     if from_filename:
         return from_filename, "filename"
 
@@ -274,6 +278,7 @@ def main():
     parser.add_argument("--sellpoints", help="Sellpoints text, usually from DS_zhutu_Branch2 result")
     parser.add_argument("--sellpoints-file", help="Path to sellpoints file (txt/json/md)")
     parser.add_argument("--product-name", help="Explicit product name override")
+    parser.add_argument("--original-filename", help="Original uploaded/display filename, used for Product_name inference when local path was renamed")
     parser.add_argument("--workflow-id", default=os.environ.get("COZE_PRODUCT_WORKFLOW_ID", DEFAULT_WORKFLOW_ID))
     parser.add_argument("--api-token", default=os.environ.get("COZE_API_TOKEN"))
     parser.add_argument("--url", default=DEFAULT_URL)
@@ -285,10 +290,10 @@ def main():
 
     product_information = extract_text_from_file(args.file)
     sellpoints = load_sellpoints(args.sellpoints, args.sellpoints_file)
-    product_name, product_name_source = resolve_product_name(args.file, product_information, args.product_name)
+    product_name, product_name_source = resolve_product_name(args.file, product_information, args.product_name, original_filename=args.original_filename)
     if not product_name:
         raise ValueError(
-            "Unable to identify Product_name. Tried: filename -> document content. "
+            "Unable to identify Product_name. Tried: original/display filename -> local filename -> document content. "
             "Please provide --product-name explicitly."
         )
 
