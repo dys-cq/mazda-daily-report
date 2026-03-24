@@ -97,15 +97,69 @@ def extract_text_from_file(file_path: str) -> str:
     raise ValueError(f"Unsupported file format: {ext}. Only .docx .pdf .txt are supported.")
 
 
-def infer_product_name(file_path: str) -> str:
-    stem = Path(file_path).stem
-    stem = re.sub(r"[_\-]+", " ", stem)
-    chinese_parts = re.findall(r"[\u4e00-\u9fffA-Za-z0-9]+", stem)
-    if chinese_parts:
-        candidate = "".join(chinese_parts).strip()
-        if candidate:
+def _looks_like_random_or_unusable_name(name: str) -> bool:
+    normalized = re.sub(r"[^A-Za-z0-9]", "", name or "")
+    if not normalized:
+        return True
+    if re.fullmatch(r"[A-Fa-f0-9]{24,}", normalized):
+        return True
+    if re.fullmatch(r"[A-Za-z0-9]{24,}", normalized) and not re.search(r"[\u4e00-\u9fff]", name or ""):
+        return True
+    return False
+
+
+def infer_product_name_from_filename(file_path: str) -> str | None:
+    stem = Path(file_path).stem.strip()
+    chinese_chunks = re.findall(r"[\u4e00-\u9fff]+", stem)
+    if chinese_chunks:
+        candidate = "".join(chinese_chunks).strip()
+        if candidate and not _looks_like_random_or_unusable_name(candidate):
             return candidate
-    return DEFAULT_PRODUCT_NAME
+
+    cleaned = re.sub(r"[_\-]+", " ", stem).strip()
+    if cleaned and not _looks_like_random_or_unusable_name(cleaned) and re.search(r"[\u4e00-\u9fff]", cleaned):
+        return cleaned
+    return None
+
+
+def infer_product_name_from_content(content: str) -> str | None:
+    lines = [line.strip() for line in content.splitlines() if line.strip()]
+
+    labeled_patterns = [
+        r"(?:产品名称|品名|名称)[:：]\s*([\u4e00-\u9fffA-Za-z0-9·（）()\-\s]{2,60})",
+        r"^([\u4e00-\u9fffA-Za-z0-9·（）()\-\s]{4,60}(?:洁面乳|洁面霜|洗面奶|面膜|精华液|精华水|爽肤水|乳液|面霜|眼霜|防晒霜|洗发水|沐浴露))$",
+    ]
+    for line in lines[:80]:
+        for pattern in labeled_patterns:
+            match = re.search(pattern, line)
+            if match:
+                candidate = re.sub(r"\s+", "", match.group(1)).strip("：:;；，,. ")
+                if candidate and not _looks_like_random_or_unusable_name(candidate):
+                    return candidate
+
+    joined = "\n".join(lines[:120])
+    generic_pattern = r"([\u4e00-\u9fffA-Za-z0-9·（）()\-]{4,60}(?:洁面乳|洁面霜|洗面奶|面膜|精华液|精华水|爽肤水|乳液|面霜|眼霜|防晒霜|洗发水|沐浴露))"
+    match = re.search(generic_pattern, joined)
+    if match:
+        candidate = re.sub(r"\s+", "", match.group(1)).strip()
+        if candidate and not _looks_like_random_or_unusable_name(candidate):
+            return candidate
+    return None
+
+
+def resolve_product_name(file_path: str, product_information: str, explicit_product_name: str | None) -> tuple[str | None, str]:
+    if explicit_product_name and explicit_product_name.strip():
+        return explicit_product_name.strip(), "explicit"
+
+    from_filename = infer_product_name_from_filename(file_path)
+    if from_filename:
+        return from_filename, "filename"
+
+    from_content = infer_product_name_from_content(product_information)
+    if from_content:
+        return from_content, "content"
+
+    return None, "missing"
 
 
 def load_sellpoints(raw_text: str | None, raw_file: str | None) -> str:
@@ -231,7 +285,12 @@ def main():
 
     product_information = extract_text_from_file(args.file)
     sellpoints = load_sellpoints(args.sellpoints, args.sellpoints_file)
-    product_name = args.product_name or infer_product_name(args.file) or DEFAULT_PRODUCT_NAME
+    product_name, product_name_source = resolve_product_name(args.file, product_information, args.product_name)
+    if not product_name:
+        raise ValueError(
+            "Unable to identify Product_name. Tried: filename -> document content. "
+            "Please provide --product-name explicitly."
+        )
 
     result = call_workflow(
         url=args.url,
@@ -247,6 +306,7 @@ def main():
             "file": str(Path(args.file).resolve()),
             "workflow_id": args.workflow_id,
             "product_name": product_name,
+            "product_name_source": product_name_source,
             "product_information_length": len(product_information),
             "sellpoints_length": len(sellpoints),
         },
