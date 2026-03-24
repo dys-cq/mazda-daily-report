@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>抖音封面 - OpenClaw</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(0, 229, 255, 0.32), transparent 28%),
+        radial-gradient(circle at 83% 14%, rgba(255, 0, 122, 0.28), transparent 26%),
+        radial-gradient(circle at 50% 78%, rgba(98, 0, 255, 0.22), transparent 34%),
+        linear-gradient(160deg, #090b14 0%, #0f1222 44%, #151a30 100%);
+      color: #fff;
+    }
+    body {
+      min-width: 1080px;
+      padding: 40px 36px 36px;
+    }
+    .cover {
+      width: 1080px;
+      min-height: 1680px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 46px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        linear-gradient(145deg, rgba(0,0,0,0.26), rgba(0,0,0,0.08));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 100px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
+      padding: 62px 58px 56px;
+    }
+    .noise, .ring, .ring2, .glow {
+      position: absolute;
+      pointer-events: none;
+    }
+    .noise {
+      inset: 0;
+      opacity: 0.07;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mix-blend-mode: overlay;
+    }
+    .ring {
+      width: 560px; height: 560px;
+      top: -160px; right: -120px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+      box-shadow: 0 0 120px rgba(0,229,255,0.18);
+    }
+    .ring2 {
+      width: 420px; height: 420px;
+      left: -120px; bottom: 260px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 100px rgba(255,0,122,0.16);
+    }
+    .glow {
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(255,0,122,0.22), transparent 68%);
+      right: 60px; top: 180px;
+      filter: blur(12px);
+    }
+    .topbar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .badge .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00e5ff, #ff007a);
+      box-shadow: 0 0 20px rgba(0,229,255,0.7);
+    }
+    .step {
+      font-size: 28px;
+      color: rgba(255,255,255,0.78);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .hero {
+      position: relative;
+      z-index: 2;
+      margin-top: 8px;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(0,229,255,0.16), rgba(255,0,122,0.16));
+      border: 1px solid rgba(255,255,255,0.10);
+      font-size: 24px;
+      font-weight: 800;
+      color: #dffcff;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-size: 86px;
+      line-height: 1.06;
+      font-weight: 950;
+      letter-spacing: -2px;
+      max-width: 920px;
+      text-wrap: balance;
+      text-shadow: 0 8px 26px rgba(0,0,0,0.35);
+    }
+    .hl-cyan { color: #7cf6ff; }
+    .hl-pink { color: #ff6fb0; }
+    .sub {
+      margin-top: 26px;
+      max-width: 900px;
+      font-size: 34px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+    }
+    .preview {
+      position: relative;
+      z-index: 2;
+      margin-top: 48px;
+      border-radius: 36px;
+      padding: 30px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .preview-inner {
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fff7ef, #ffe4f0 45%, #efe9ff 100%);
+      min-height: 610px;
+      position: relative;
+      padding: 34px;
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      height: 100%;
+    }
+    .mock-card {
+      border-radius: 28px;
+      background: rgba(255,255,255,0.82);
+      box-shadow: 0 18px 40px rgba(107, 63, 144, 0.16);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mock-card.big {
+      min-height: 546px;
+      background:
+        radial-gradient(circle at top left, rgba(255,98,154,0.20), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(0,229,255,0.18), transparent 28%),
+        rgba(255,255,255,0.86);
+    }
+    .mini-tag {
+      display: inline-block;
+      font-size: 22px;
+      font-weight: 800;
+      color: #6c43b3;
+      background: rgba(108,67,179,0.10);
+      border-radius: 999px;
+      padding: 8px 14px;
+      margin-bottom: 18px;
+    }
+    .mock-title {
+      font-size: 44px;
+      line-height: 1.14;
+      color: #1b1730;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    .mock-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #223;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(82, 55, 126, 0.08);
+    }
+    .phone {
+      position: absolute;
+      right: 26px;
+      bottom: 24px;
+      width: 240px;
+      height: 430px;
+      border-radius: 34px;
+      background: linear-gradient(180deg, #17191f, #0d1018);
+      box-shadow: 0 18px 40px rgba(12,12,20,0.28);
+      border: 2px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .phone::before {
+      content: "";
+      position: absolute;
+      left: 50%; top: 14px;
+      transform: translateX(-50%);
+      width: 92px; height: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+    }
+    .phone-screen {
+      position: absolute;
+      inset: 32px 12px 12px;
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(12,14,24,0.10), rgba(12,14,24,0.30)),
+        linear-gradient(135deg, #ffbdd5, #c8eaff 55%, #efe2ff 100%);
+      overflow: hidden;
+    }
+    .screen-lines {
+      position: absolute;
+      left: 14px; right: 14px; top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .screen-lines span {
+      display: block;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+    }
+    .screen-lines span:nth-child(1) { width: 78%; }
+    .screen-lines span:nth-child(2) { width: 62%; }
+    .screen-lines span:nth-child(3) { width: 84%; }
+    .screen-lines span:nth-child(4) { width: 56%; }
+    .side-col {
+      display: grid;
+      gap: 24px;
+      grid-template-rows: 1fr 1fr;
+    }
+    .mock-card.small {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .small .mock-title {
+      font-size: 34px;
+    }
+    .small p {
+      font-size: 22px;
+      line-height: 1.45;
+      color: #463d67;
+      font-weight: 700;
+    }
+    .footer-note {
+      position: relative;
+      z-index: 2;
+      margin-top: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgba(255,255,255,0.75);
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #00e5ff, #ff007a);
+      box-shadow: 0 10px 24px rgba(0,229,255,0.28);
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="noise"></div>
+    <div class="ring"></div>
+    <div class="ring2"></div>
+    <div class="glow"></div>
+
+    <div class="topbar">
+      <div class="badge"><span class="dot"></span><span>OpenClaw 实战体验</span></div>
+      <div class="step">AI 配图 / 封面 / 自动化</div>
+    </div>
+
+    <div class="hero">
+      <div class="eyebrow">一条命令，快速出图</div>
+      <h1>用<span class="hl-cyan">OpenClaw</span>快速生成的<br>小某书配图<br>是什么样的<span class="hl-pink">体验</span>？</h1>
+      <div class="sub">更像真正抖音封面的布局：主标题更靠上、留白更紧凑、底部冗余卡片已移除，重点只保留一个核心视觉区。</div>
+    </div>
+
+    <div class="preview">
+      <div class="preview-inner">
+        <div class="preview-grid">
+          <div class="mock-card big">
+            <div class="mini-tag">小某书配图</div>
+            <div class="mock-title">从提示词到成图，<br>速度、质感、完成度<br>到底怎么样？</div>
+            <div class="mock-pills">
+              <span class="pill">封面感</span>
+              <span class="pill">出图快</span>
+              <span class="pill">自动化</span>
+              <span class="pill">可批量</span>
+            </div>
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="screen-lines">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="side-col">
+            <div class="mock-card small">
+              <div>
+                <div class="mini-tag">体验重点</div>
+                <div class="mock-title">不是能不能做，<br>而是够不够快、够不像模板。</div>
+              </div>
+              <p>适合封面、配图、平台适配一次做完。</p>
+            </div>
+            <div class="mock-card small">
+              <div>
+                <div class="mini-tag">结果导向</div>
+                <div class="mock-title">一份 HTML，<br>导出多种比例。</div>
+              </div>
+              <p>同一套视觉可直接裁成 3:4 和 4:3 两版。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <div class="footer-left"><span class="logo"></span><span>OpenClaw · HTML to Media Cover</span></div>
+      <div>封面实验 / 2026</div>
+    </div>
+  </div>
+</body>
+</html>
