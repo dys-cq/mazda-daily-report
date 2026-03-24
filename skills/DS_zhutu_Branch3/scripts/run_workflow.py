@@ -112,18 +112,29 @@ def infer_product_name_from_filename(file_path: str, original_filename: str | No
     raw_name = original_filename.strip() if original_filename and original_filename.strip() else Path(file_path).name
     stem = Path(raw_name).stem.strip()
 
-    candidate = re.sub(r"[_\-]+", "", stem)
-    candidate = re.sub(r"^(测试样例|测试样本|测试文件|测试文档|测试|样例|样本|示例)+", "", candidate)
-    candidate = re.sub(r"^[A-Za-z]{1,6}\d{2,10}", "", candidate)
-    candidate = re.sub(r"^(第?[A-Za-z0-9一二三四五六七八九十]+版)", "", candidate)
-    candidate = candidate.strip()
+    # Normalize separators first.
+    compact = re.sub(r"[_\-\s]+", "", stem)
+    compact = re.sub(r"^(测试样例|测试样本|测试文件|测试文档|测试|样例|样本|示例)+", "", compact)
+    compact = re.sub(r"^[A-Za-z]{1,8}\d{2,12}", "", compact)
+    compact = re.sub(r"^(第?[A-Za-z0-9一二三四五六七八九十]+版)", "", compact)
+    compact = compact.strip()
 
-    suffix_match = re.search(
-        r"([\u4e00-\u9fffA-Za-z0-9·（）()]{2,80}(?:洁面乳|洁面霜|洗面奶|面膜|精华液|精华水|爽肤水|乳液|面霜|眼霜|防晒霜|洗发水|沐浴露))",
-        candidate,
-    )
+    product_suffixes = r"洁面乳|洁面霜|洗面奶|面膜|精华液|精华水|爽肤水|乳液|面霜|眼霜|防晒霜|洗发水|沐浴露"
+    anchored_match = re.search(rf"([\u4e00-\u9fffA-Za-z0-9·（）()]{{2,60}}(?:{product_suffixes}))$", compact)
+    if anchored_match:
+        normalized = re.sub(r"\s+", "", anchored_match.group(1)).strip()
+        normalized = re.sub(r"^(测试样例|测试样本|测试文件|测试文档|测试|样例|样本|示例)+", "", normalized)
+        normalized = re.sub(r"^[A-Za-z]{1,8}\d{2,12}", "", normalized)
+        normalized = normalized.strip()
+        if normalized and not _looks_like_random_or_unusable_name(normalized):
+            return normalized
+
+    suffix_match = re.search(rf"([\u4e00-\u9fffA-Za-z0-9·（）()]{{2,80}}(?:{product_suffixes}))", compact)
     if suffix_match:
         normalized = re.sub(r"\s+", "", suffix_match.group(1)).strip()
+        normalized = re.sub(r"^(测试样例|测试样本|测试文件|测试文档|测试|样例|样本|示例)+", "", normalized)
+        normalized = re.sub(r"^[A-Za-z]{1,8}\d{2,12}", "", normalized)
+        normalized = normalized.strip()
         if normalized and not _looks_like_random_or_unusable_name(normalized):
             return normalized
 
