@@ -1,9 +1,9 @@
 ---
-name: coze-product-workflow-runner
+name: DS_zhutu_Branch3
 description: 调用指定的扣子 Coze workflow/stream_run 处理产品资料文档。支持读取 DOCX、PDF、TXT 文件，将提取的正文传给 Product_Information；将 DS_zhutu_Branch2 的输出传给 sellpoints；从文件名识别 Product_name，识别失败时默认使用“酷洛菲黑松露润浸洁面乳”。当需要基于本地产品文档 + 卖点结果调用 Coze 工作流时使用。
 ---
 
-# coze-product-workflow-runner
+# DS_zhutu_Branch3
 
 用这个技能把本地产品资料文档转换成 Coze workflow 所需参数并调用工作流。
 
