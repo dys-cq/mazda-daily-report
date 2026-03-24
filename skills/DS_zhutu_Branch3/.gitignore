@@ -1,0 +1,35 @@
+# Local environment and secrets
+.env
+.env.*
+
+# Python cache / virtualenv
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Runtime output / test artifacts
+output/
+work/
+*.log
+*.out
+*.err
+
+# Local test/generated media
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp3
+*.wav
+*.srt
+*.pdf
