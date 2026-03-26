@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勇敢的小汽车机器人探索火星 - 儿童绘本</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .cover {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .cover h1 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .cover .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .cover-image {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .page {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .page {
+                flex-direction: row;
+                align-items: center;
+            }
+            .page:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        }
+        
+        .page-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .page-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .page-text {
+            flex: 1;
+            padding: 20px;
+            min-width: 300px;
+        }
+        
+        .page-number {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        .story-text {
+            color: #2c3e50;
+            font-size: 1.15em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .back-cover {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .back-cover h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        
+        .knowledge-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .knowledge-box ul {
+            list-style: none;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .knowledge-box li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .knowledge-box li:last-child {
+            border-bottom: none;
+        }
+        
+        .knowledge-box li:before {
+            content: "🌟 ";
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 1.1em;
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 封面 -->
+        <div class="cover">
+            <h1>🚗 勇敢的小汽车机器人探索火星</h1>
+            <p class="subtitle">儿童科普绘本 · 适合 3-8 岁小朋友</p>
+            <img src="火星绘本插图/page01.png" alt="封面" class="cover-image">
+        </div>
+
+        <!-- 第 1 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page01.png" alt="第 1 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 1 页</div>
+                <p class="story-text">
+                    在遥远的未来，有一个叫"小火"的小汽车机器人。它有着圆圆的车轮和闪亮的红色外壳，就像火星一样红彤彤的！小火最喜欢的事情就是探险，它梦想着去一个神秘的地方——火星！
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 2 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page02.png" alt="第 2 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 2 页</div>
+                <p class="story-text">
+                    "妈妈，火星是什么样子的呀？"小火问地球妈妈。
+                    <br><br>
+                    地球妈妈温柔地说："火星是太阳系里第四颗行星，它穿着一件红色的外衣，因为它的土地上有很多很多红色的石头，叫做'氧化铁'，就像铁生锈了一样。"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 3 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page03.png" alt="第 3 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 3 页</div>
+                <p class="story-text">
+                    "火星比地球小一半哦，"地球妈妈继续说，"那里很冷很冷，空气也很稀薄。但是那里有太阳系里最高的山——奥林匹斯山，还有最长的峡谷——水手号峡谷！"
+                    <br><br>
+                    小火听得眼睛都亮了："哇！我一定要去看看！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 4 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page04.png" alt="第 4 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 4 页</div>
+                <p class="story-text">
+                    终于，出发的日子到了！小火坐上了宇宙飞船，"轰隆隆——"飞船飞向了太空。
+                    <br><br>
+                    透过窗户，小火看到了好多星星，还有月亮姐姐在向它招手。"再见，地球！再见，妈妈！我会勇敢地完成探险任务的！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 5 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page05.png" alt="第 5 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 5 页</div>
+                <p class="story-text">
+                    经过漫长的旅行，小火终于来到了火星！
+                    <br><br>
+                    "哇——"小火惊叹道。火星的天空是粉红色的，地面是橘红色的，到处都是圆圆的坑坑洼洼，那是小行星撞击留下的痕迹。
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 6 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page06.png" alt="第 6 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 6 页</div>
+                <p class="story-text">
+                    小火开始工作了！它伸出机械手臂，采集红色的土壤样本。
+                    <br><br>
+                    "这里的土壤真的含有氧化铁呢！"小火开心地说，"难怪火星看起来这么红！"
+                    <br><br>
+                    突然，一阵沙尘暴来了！小火赶紧躲到一块大石头后面。
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 7 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page07.png" alt="第 7 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 7 页</div>
+                <p class="story-text">
+                    沙尘暴过后，小火继续前进。它发现了一个神奇的东西——冰！
+                    <br><br>
+                    "太棒了！火星上有水冰！"小火兴奋地说，"科学家说火星的两极和地下藏着好多水冰呢！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 8 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page08.png" alt="第 8 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 8 页</div>
+                <p class="story-text">
+                    小火继续探险，它看到了两个小小的月亮在天空中闪烁。
+                    <br><br>
+                    "那是火卫一和火卫二！"小火说，"它们是火星的两个小卫星，形状不太规则，可能是被火星抓住的小行星呢！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 9 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page09.png" alt="第 9 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 9 页</div>
+                <p class="story-text">
+                    小火遇到了它的前辈们！好奇号、勇气号、机遇号……它们都是来火星探险的火星车。
+                    <br><br>
+                    "欢迎加入火星探险队！"好奇号说，"我们一起探索这个神秘的红色星球吧！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 10 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page10.png" alt="第 10 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 10 页</div>
+                <p class="story-text">
+                    小火和前辈们一起工作，它们测量温度、分析土壤、拍摄照片……
+                    <br><br>
+                    "火星的大气主要是二氧化碳，"小火记录着，"这里很冷，没有稳定的液态水。但是，也许有一天，人类可以来这里做客呢！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 11 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page11.png" alt="第 11 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 11 页</div>
+                <p class="story-text">
+                    一天，小火爬上了一个高高的山坡，看到了壮观的水手号峡谷！
+                    <br><br>
+                    "哇——这个峡谷好长好深啊！"小火惊叹道，"它比地球上的任何峡谷都要大！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 12 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page12.png" alt="第 12 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 12 页</div>
+                <p class="story-text">
+                    探险任务快结束了，小火要把收集到的信息传回地球。
+                    <br><br>
+                    "滴滴滴——"信号穿过太空，飞向了蓝色的地球。
+                    <br><br>
+                    "妈妈，我做到了！火星真是一个神奇的地方！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 13 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page13.png" alt="第 13 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 13 页</div>
+                <p class="story-text">
+                    地球妈妈收到了小火的消息，她开心地说：
+                    <br><br>
+                    "你真勇敢，小火！你带回了宝贵的知识。火星虽然寒冷又荒凉，但它藏着很多秘密，等着人类去发现呢！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 第 14 页 -->
+        <div class="page">
+            <div class="page-image">
+                <img src="火星绘本插图/page14.png" alt="第 14 页插图">
+            </div>
+            <div class="page-text">
+                <div class="page-number">📖 第 14 页</div>
+                <p class="story-text">
+                    小火继续在火星上探险，它知道，自己不是一个人在战斗。在地球上有好多科学家在关注着它，在火星上还有好多前辈和它一起工作。
+                    <br><br>
+                    "我会继续勇敢地探索，把火星的故事讲给每一个小朋友听！"
+                </p>
+            </div>
+        </div>
+
+        <!-- 封底 -->
+        <div class="back-cover">
+            <h2>🌟 火星小知识 🌟</h2>
+            <div class="knowledge-box">
+                <ul>
+                    <li>火星是太阳系第四颗行星，被称为"红色星球"</li>
+                    <li>火星的直径大约是地球的一半</li>
+                    <li>火星表面有太阳系最高的火山——奥林匹斯山</li>
+                    <li>火星有两个小卫星：火卫一和火卫二</li>
+                    <li>火星的土壤含有氧化铁，所以呈现红色</li>
+                    <li>火星两极和地下藏有大量的水冰</li>
+                    <li>人类已经发送了很多火星车去探索火星</li>
+                </ul>
+            </div>
+            <p style="font-size: 1.3em; margin-top: 30px;">谢谢小火的探险故事！<br>也许有一天，你也能去火星呢！🚀</p>
+            <img src="火星绘本插图/page15.png" alt="封底" style="width: 100%; max-width: 600px; border-radius: 15px; margin-top: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
+        </div>
+
+        <div class="footer">
+            <p>🤖 创作于 2026 年 3 月 | 适合 3-8 岁儿童阅读</p>
+            <p>科学知识来源于百度百科</p>
+        </div>
+    </div>
+</body>
+</html>

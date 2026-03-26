@@ -1,0 +1,141 @@
+{
+  "jobs": 4,
+  "tasks": [
+    {
+      "id": "01-cover",
+      "promptFiles": ["prompts/01-slide-cover.md"],
+      "image": "01-slide-cover.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "02-intro",
+      "promptFiles": ["prompts/02-slide-intro.md"],
+      "image": "02-slide-intro.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "03-strengths",
+      "promptFiles": ["prompts/03-slide-strengths.md"],
+      "image": "03-slide-strengths.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "04-weaknesses",
+      "promptFiles": ["prompts/04-slide-weaknesses.md"],
+      "image": "04-slide-weaknesses.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "05-achievements",
+      "promptFiles": ["prompts/05-slide-achievements.md"],
+      "image": "05-slide-achievements.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "06-automation",
+      "promptFiles": ["prompts/06-slide-automation.md"],
+      "image": "06-slide-automation.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "07-reasons",
+      "promptFiles": ["prompts/07-slide-reasons.md"],
+      "image": "07-slide-reasons.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "08-strategy",
+      "promptFiles": ["prompts/08-slide-strategy.md"],
+      "image": "08-slide-strategy.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "09-phase1",
+      "promptFiles": ["prompts/09-slide-phase1.md"],
+      "image": "09-slide-phase1.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "10-phase2",
+      "promptFiles": ["prompts/10-slide-phase2.md"],
+      "image": "10-slide-phase2.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "11-phase3",
+      "promptFiles": ["prompts/11-slide-phase3.md"],
+      "image": "11-slide-phase3.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "12-team1",
+      "promptFiles": ["prompts/12-slide-team1.md"],
+      "image": "12-slide-team1.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "13-team2",
+      "promptFiles": ["prompts/13-slide-team2.md"],
+      "image": "13-slide-team2.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "14-team3",
+      "promptFiles": ["prompts/14-slide-team3.md"],
+      "image": "14-slide-team3.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "15-team4",
+      "promptFiles": ["prompts/15-slide-team4.md"],
+      "image": "15-slide-team4.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "16-vision",
+      "promptFiles": ["prompts/16-slide-vision.md"],
+      "image": "16-slide-vision.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    },
+    {
+      "id": "17-closing",
+      "promptFiles": ["prompts/17-slide-closing.md"],
+      "image": "17-slide-closing.png",
+      "provider": "openai",
+      "model": "gpt-image-1",
+      "ar": "16:9"
+    }
+  ]
+}

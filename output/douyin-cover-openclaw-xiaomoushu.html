@@ -12,15 +12,15 @@
       overflow: hidden;
       font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 15% 20%, rgba(255,122,89,0.22) 0, rgba(255,122,89,0) 28%),
-        radial-gradient(circle at 85% 18%, rgba(255,0,128,0.20) 0, rgba(255,0,128,0) 26%),
-        radial-gradient(circle at 50% 82%, rgba(94,92,230,0.20) 0, rgba(94,92,230,0) 30%),
+        radial-gradient(circle at 15% 18%, rgba(255,122,89,0.22) 0, rgba(255,122,89,0) 28%),
+        radial-gradient(circle at 85% 16%, rgba(255,0,128,0.20) 0, rgba(255,0,128,0) 26%),
+        radial-gradient(circle at 52% 86%, rgba(94,92,230,0.22) 0, rgba(94,92,230,0) 32%),
         linear-gradient(160deg, #0b1020 0%, #151b33 45%, #1f1338 100%);
       color: #fff;
     }
     body {
       position: relative;
-      padding: 86px 72px;
+      padding: 54px 58px 46px;
     }
     .noise, .grid, .glow { position: absolute; inset: 0; pointer-events: none; }
     .grid {
@@ -28,8 +28,8 @@
         linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
       background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.08));
-      opacity: 0.35;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.10));
+      opacity: 0.32;
     }
     .noise {
       background-image: radial-gradient(rgba(255,255,255,0.12) 0.8px, transparent 0.8px);
@@ -45,12 +45,12 @@
       opacity: 0.55;
     }
     .glow::before {
-      width: 320px; height: 320px; left: -60px; top: 220px;
-      background: rgba(255, 97, 97, 0.36);
+      width: 320px; height: 320px; left: -60px; top: 180px;
+      background: rgba(255, 97, 97, 0.34);
     }
     .glow::after {
-      width: 360px; height: 360px; right: -80px; bottom: 200px;
-      background: rgba(132, 103, 255, 0.34);
+      width: 420px; height: 420px; right: -100px; bottom: 120px;
+      background: rgba(132, 103, 255, 0.32);
     }
 
     .frame {
@@ -59,75 +59,40 @@
       width: 100%;
       height: 100%;
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 42px;
+      border-radius: 40px;
       background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
       box-shadow: 0 30px 120px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
-      padding: 56px;
+      padding: 48px 42px 38px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       backdrop-filter: blur(12px);
     }
 
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 48px;
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.14);
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .tag .dot {
-      width: 14px; height: 14px; border-radius: 50%;
-      background: linear-gradient(135deg, #ff4d6d, #7a5cff);
-      box-shadow: 0 0 20px rgba(255,77,109,0.8);
-    }
-    .badge {
-      font-size: 26px;
-      font-weight: 700;
-      padding: 12px 18px;
-      border-radius: 18px;
-      color: #111;
-      background: linear-gradient(135deg, #ffd36a, #ff8a5b);
-      box-shadow: 0 12px 32px rgba(255,138,91,0.25);
-    }
-
     .content {
-      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 34px;
-      padding: 12px 0 24px;
+      gap: 24px;
     }
     .kicker {
       display: inline-block;
       width: fit-content;
-      padding: 12px 18px;
+      padding: 10px 16px;
       border-radius: 16px;
       background: rgba(122,92,255,0.16);
       border: 1px solid rgba(159,136,255,0.30);
-      color: #d9d1ff;
-      font-size: 28px;
+      color: #ddd5ff;
+      font-size: 26px;
       font-weight: 700;
       letter-spacing: 1px;
     }
     h1 {
-      font-size: 98px;
-      line-height: 1.08;
+      font-size: 106px;
+      line-height: 1.04;
       font-weight: 900;
-      letter-spacing: -2px;
+      letter-spacing: -2.5px;
       text-shadow: 0 8px 40px rgba(0,0,0,0.28);
+      max-width: 900px;
     }
     h1 .accent {
       display: block;
@@ -137,63 +102,164 @@
       color: transparent;
     }
     .sub {
-      font-size: 40px;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.86);
-      max-width: 860px;
+      font-size: 38px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.88);
+      max-width: 890px;
       font-weight: 500;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 8px;
+    .hero {
+      margin-top: 12px;
+      height: 700px;
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,180,90,0.28) 0, rgba(255,180,90,0) 22%),
+        radial-gradient(circle at 78% 30%, rgba(255,77,109,0.24) 0, rgba(255,77,109,0) 20%),
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 24px 60px rgba(0,0,0,0.22);
     }
-    .card {
-      min-height: 188px;
-      border-radius: 26px;
-      padding: 22px 22px 20px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.05));
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 40%),
+        linear-gradient(0deg, rgba(9,12,26,0.10), rgba(9,12,26,0.10));
     }
-    .card .emoji {
-      font-size: 42px;
-      margin-bottom: 12px;
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.28;
     }
-    .card h3 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      font-weight: 800;
-    }
-    .card p {
-      font-size: 22px;
-      line-height: 1.45;
-      color: rgba(255,255,255,0.78);
-    }
-
-    .footer {
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 34px;
       display: flex;
+      gap: 26px;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.12);
     }
-    .brand {
+    .phone {
+      width: 310px;
+      height: 560px;
+      border-radius: 36px;
+      background: linear-gradient(180deg, #f6f7fb, #e7ebf4);
+      padding: 18px;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.28);
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 10px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 20px; border-radius: 999px;
+      background: rgba(20,22,30,0.92);
+    }
+    .screen {
+      margin-top: 18px;
+      width: 100%; height: calc(100% - 18px);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 80% 16%, rgba(255,112,67,0.32), rgba(255,112,67,0) 26%),
+        linear-gradient(180deg, #ffffff 0%, #f4f6fb 100%);
+      padding: 20px;
+      color: #191e24;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .xhs-tag {
+      width: fit-content;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: #ff2741;
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+    .thumb {
+      height: 212px;
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, #1b2030 0%, #30204d 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb::before {
+      content: "AI配图";
+      position: absolute;
+      left: 18px; top: 18px;
       font-size: 34px;
       font-weight: 900;
-      letter-spacing: 0.5px;
+      color: #fff;
+      letter-spacing: -1px;
     }
-    .brand span {
-      color: #ffc66b;
+    .thumb::after {
+      content: "实测";
+      position: absolute;
+      right: 18px; bottom: 18px;
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffd36a;
     }
-    .meta {
+    .line { height: 18px; border-radius: 10px; background: #dfe5ef; }
+    .line.w1 { width: 92%; }
+    .line.w2 { width: 78%; }
+    .line.w3 { width: 58%; }
+
+    .preview {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+    }
+    .preview-head {
+      font-size: 52px;
+      line-height: 1.12;
+      font-weight: 900;
+      max-width: 520px;
+    }
+    .preview-desc {
       font-size: 28px;
-      color: rgba(255,255,255,0.75);
-      text-align: right;
       line-height: 1.5;
+      color: rgba(255,255,255,0.82);
+      max-width: 520px;
+    }
+    .mini-row {
+      display: flex;
+      gap: 18px;
+    }
+    .mini-card {
+      flex: 1;
+      min-height: 170px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .mini-card .icon {
+      font-size: 34px;
+    }
+    .mini-card .txt {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.3;
     }
   </style>
 </head>
@@ -203,11 +269,6 @@
   <div class="glow"></div>
 
   <div class="frame">
-    <div class="topbar">
-      <div class="tag"><span class="dot"></span> AI 配图体验</div>
-      <div class="badge">抖音封面</div>
-    </div>
-
     <div class="content">
       <div class="kicker">用 OpenClaw 做内容图，到底顺不顺手？</div>
       <h1>
@@ -216,31 +277,38 @@
         是什么样的体验？
       </h1>
       <div class="sub">
-        从文案到出图，从提示词到成品效果，看看 AI 工作流做出来的社媒配图到底能不能直接用。
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="emoji">⚡</div>
-          <h3>出图速度</h3>
-          <p>流程更快，适合高频内容制作。</p>
-        </div>
-        <div class="card">
-          <div class="emoji">🎨</div>
-          <h3>风格一致</h3>
-          <p>更容易做成系列化视觉风格。</p>
-        </div>
-        <div class="card">
-          <div class="emoji">📱</div>
-          <h3>适合社媒</h3>
-          <p>适配小某书封面、配图与信息卡片。</p>
-        </div>
+        我先把整体内容上移了，底下改成更大的横向配图展示区，画面会更像真正的抖音封面，而不是说明型海报。
       </div>
     </div>
 
-    <div class="footer">
-      <div class="brand">Open<span>Claw</span> × 内容工作流</div>
-      <div class="meta">封面比例 9:16<br/>1080 × 1920</div>
+    <div class="hero">
+      <div class="hero-grid"></div>
+      <div class="hero-inner">
+        <div class="phone">
+          <div class="screen">
+            <div class="xhs-tag">小某书风格</div>
+            <div class="thumb"></div>
+            <div class="line w1"></div>
+            <div class="line w2"></div>
+            <div class="line w3"></div>
+          </div>
+        </div>
+
+        <div class="preview">
+          <div class="preview-head">更大的配图展示区<br/>横向看效果</div>
+          <div class="preview-desc">把原来零碎的小卡片，改成一整块更像成品预览的视觉区，既能减少留白，也能让封面更有“内容感”。</div>
+          <div class="mini-row">
+            <div class="mini-card">
+              <div class="icon">⚡</div>
+              <div class="txt">出图更快</div>
+            </div>
+            <div class="mini-card">
+              <div class="icon">🎨</div>
+              <div class="txt">视觉更整</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>

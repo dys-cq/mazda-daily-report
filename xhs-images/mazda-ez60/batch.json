@@ -1,0 +1,40 @@
+{
+  "jobs": 4,
+  "tasks": [
+    {
+      "id": "01-cover",
+      "promptFiles": ["prompts/01-cover.md"],
+      "image": "01-cover.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "02-content1",
+      "promptFiles": ["prompts/02-content1.md"],
+      "image": "02-content1.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "03-content2",
+      "promptFiles": ["prompts/03-content2.md"],
+      "image": "03-content2.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "04-content3",
+      "promptFiles": ["prompts/04-content3.md"],
+      "image": "04-content3.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "05-ending",
+      "promptFiles": ["prompts/05-ending.md"],
+      "image": "05-ending.png",
+      "ar": "3:4",
+      "quality": "2k"
+    }
+  ]
+}

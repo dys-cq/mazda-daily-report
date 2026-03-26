@@ -3,7 +3,7 @@
 Call Coze Workflow API to process product information.
 
 Enhanced version with:
-- Markdown output format (default)
+- JSON output format (default)
 - Complete ingredient extraction
 - Structured product information
 """
@@ -116,9 +116,21 @@ def call_coze_workflow(product_info: str, product_name: str, workflow_id: str, a
     }
     
     print(f"Calling Coze API...", file=sys.stderr)
-    response = requests.post(url, headers=headers, json=payload, timeout=60)
+    response = requests.post(url, headers=headers, json=payload, timeout=120)
     print(f"Response status: {response.status_code}", file=sys.stderr)
     return response.json()
+
+
+def normalize_review_status(status: str) -> str:
+    """Normalize workflow review status into passed/corrected_passed/failed."""
+    text = (status or '').strip()
+    lowered = text.lower()
+
+    if ('修正后通过' in text) or ('修正后合规' in text) or ('corrected pass' in lowered) or ('corrected passed' in lowered):
+        return 'corrected_passed'
+    if text in ('是', '通过') or lowered in ('pass', 'passed') or text.startswith('是（') or text.startswith('通过（'):
+        return 'passed'
+    return 'failed'
 
 
 def parse_workflow_result(api_response: dict) -> dict:
@@ -132,21 +144,28 @@ def parse_workflow_result(api_response: dict) -> dict:
     # Get review status and issues
     review_status = result.get('是否通过审查', result.get('是否通过审核', ''))
     issues = result.get('问题清单', result.get('问题列表', []))
+    normalized_status = normalize_review_status(review_status)
+
+    parsed = {
+        'content': content,
+        'sections': {},
+        'review_status': review_status,
+        'normalized_review_status': normalized_status,
+        'issues': issues,
+        'execute_id': api_response.get('execute_id', ''),
+        'usage': api_response.get('usage', {}),
+        'debug_url': api_response.get('debug_url', ''),
+        'raw_workflow_output': result,
+    }
     
     # Handle both string and dict content
     if isinstance(content, dict):
-        # Content is already structured
-        content['是否通过审查'] = review_status
-        content['问题清单'] = issues
-        return {
-            'content': content,
-            'sections': content,
-            'review_status': review_status,
-            'issues': issues,
-            'execute_id': api_response.get('execute_id', ''),
-            'usage': api_response.get('usage', {}),
-            'debug_url': api_response.get('debug_url', '')
-        }
+        structured = dict(content)
+        structured['是否通过审查'] = review_status
+        structured['问题清单'] = issues
+        parsed['sections'] = structured
+        parsed['content'] = content
+        return parsed
     
     # Parse sections from string content
     sections = {}
@@ -164,21 +183,18 @@ def parse_workflow_result(api_response: dict) -> dict:
     
     if current_section:
         sections[current_section] = '\n'.join(current_content)
-    
-    return {
-        'content': content,
-        'sections': sections,
-        'review_status': review_status,
-        'issues': issues,
-        'execute_id': api_response.get('execute_id', ''),
-        'usage': api_response.get('usage', {}),
-        'debug_url': api_response.get('debug_url', '')
-    }
+
+    parsed['sections'] = sections
+    return parsed
 
 
 def generate_markdown_report(parsed_data: dict, output_path: str = None):
     """Generate Markdown format report."""
     sections = parsed_data['sections']
+    raw_content = parsed_data.get('content', '')
+    review_status = parsed_data.get('review_status', '')
+    normalized_status = parsed_data.get('normalized_review_status', normalize_review_status(review_status))
+    issues = parsed_data.get('issues', [])
     
     md_content = f"""# 产品信息分析报告
 
@@ -188,33 +204,58 @@ def generate_markdown_report(parsed_data: dict, output_path: str = None):
 ---
 
 """
-    
-    # Product Name
-    if '产品全称' in sections:
-        md_content += f"## 1. 产品全称\n\n{sections['产品全称']}\n\n"
-    
-    # Ingredients
-    if '产品成分信息' in sections:
-        md_content += f"## 2. 产品成分信息\n\n{sections['产品成分信息']}\n\n"
-    
-    # Selling Points
-    if '产品卖点信息' in sections:
-        md_content += f"## 3. 产品卖点信息\n\n{sections['产品卖点信息']}\n\n"
-    
-    # Specifications
-    if '产品规格信息' in sections:
-        md_content += f"## 4. 产品规格信息\n\n{sections['产品规格信息']}\n\n"
-    
-    # Regulatory Info
-    if '产品备案信息' in sections:
-        md_content += f"## 5. 产品备案信息\n\n{sections['产品备案信息']}\n\n"
-    
-    # Usage Instructions
-    if '使用说明' in sections:
-        md_content += f"## 6. 使用说明\n\n{sections['使用说明']}\n\n"
-    
+
+    # When review fails, prioritize the workflow's corrected final content verbatim
+    if normalized_status == 'failed' and raw_content:
+        md_content += f"## 修正后的最终内容\n\n{raw_content}\n\n"
+    else:
+        # Prefer showing the raw workflow content when available
+        if raw_content:
+            md_content += f"## 最终输出内容\n\n{raw_content}\n\n"
+        else:
+            # Product Name
+            if '产品全称' in sections:
+                md_content += f"## 1. 产品全称\n\n{sections['产品全称']}\n\n"
+            
+            # Ingredients
+            if '产品成分信息' in sections:
+                md_content += f"## 2. 产品成分信息\n\n{sections['产品成分信息']}\n\n"
+            
+            # Selling Points
+            if '产品卖点信息' in sections:
+                md_content += f"## 3. 产品卖点信息\n\n{sections['产品卖点信息']}\n\n"
+            
+            # Specifications
+            if '产品规格信息' in sections:
+                md_content += f"## 4. 产品规格信息\n\n{sections['产品规格信息']}\n\n"
+            
+            # Regulatory Info
+            if '产品备案信息' in sections:
+                md_content += f"## 5. 产品备案信息\n\n{sections['产品备案信息']}\n\n"
+            
+            # Usage Instructions
+            if '使用说明' in sections:
+                md_content += f"## 6. 使用说明\n\n{sections['使用说明']}\n\n"
+
+    # Review summary
+    md_content += f"## 审核结果\n\n- 审核状态：{review_status or '未知'}\n"
+    if issues:
+        md_content += "- 问题清单：\n"
+        for idx, issue in enumerate(issues, 1):
+            if isinstance(issue, dict):
+                pos = issue.get('位置', issue.get('卖点位置', issue.get('问题位置', 'N/A')))
+                typ = issue.get('问题类型', 'N/A')
+                desc = issue.get('问题描述', issue.get('问题内容', 'N/A'))
+                md_content += f"  {idx}. 位置：{pos}；类型：{typ}；描述：{desc}\n"
+            else:
+                md_content += f"  {idx}. {issue}\n"
+    else:
+        md_content += "- 问题清单：无\n"
+
     # Execution Info
-    md_content += f"""---
+    md_content += f"""
+
+---
 
 ## 执行信息
 
@@ -309,6 +350,7 @@ def main():
     parser.add_argument('--output', '-o', help='Output Markdown file path')
     parser.add_argument('--ingredients', '-i', action='store_true', help='Generate ingredients-only report')
     parser.add_argument('--json', action='store_true', help='Output in JSON format instead of Markdown')
+    parser.add_argument('--product-name', help='Product name to pass explicitly; overrides filename extraction')
     
     args = parser.parse_args()
     
@@ -316,7 +358,7 @@ def main():
         # Extract text
         print(f"Reading file: {args.file_path}", file=sys.stderr)
         product_info = extract_text_from_file(args.file_path)
-        product_name = extract_product_name_from_filename(args.file_path)
+        product_name = args.product_name.strip() if args.product_name and args.product_name.strip() else extract_product_name_from_filename(args.file_path)
         
         # Call API
         result = call_coze_workflow(product_info, product_name, args.workflow_id, args.api_token)
@@ -326,10 +368,11 @@ def main():
         
         # Check review status
         review_status = parsed.get('review_status', '')
+        normalized_status = parsed.get('normalized_review_status', normalize_review_status(review_status))
         issues = parsed.get('issues', [])
         
         # Display review status prominently
-        if review_status != '是' and review_status != '通过':
+        if normalized_status == 'failed':
             print("\n" + "=" * 70, file=sys.stderr)
             print("❌ 卖点审查未通过", file=sys.stderr)
             print("=" * 70, file=sys.stderr)
@@ -342,7 +385,7 @@ def main():
                             print(f"\n问题 {i}:", file=sys.stderr)
                             print(f"  位置：{issue.get('位置', issue.get('问题位置', 'N/A'))}", file=sys.stderr)
                             print(f"  类型：{issue.get('问题类型', 'N/A')}", file=sys.stderr)
-                            print(f"  描述：{issue.get('问题描述', 'N/A')}", file=sys.stderr)
+                            print(f"  描述：{issue.get('问题描述', issue.get('问题内容', 'N/A'))}", file=sys.stderr)
                         else:
                             print(f"\n问题 {i}: {issue}", file=sys.stderr)
                 else:
@@ -354,15 +397,21 @@ def main():
             print("=" * 70 + "\n", file=sys.stderr)
         
         # Generate output
-        if args.json:
-            # JSON output
-            print(json.dumps(parsed, ensure_ascii=False, indent=2))
-        elif args.ingredients:
+        if args.ingredients:
             # Ingredients report
             generate_ingredients_report(parsed, args.output)
         else:
-            # Full Markdown report
-            generate_markdown_report(parsed, args.output)
+            if args.json:
+                output_payload = parsed
+            else:
+                output_payload = parsed.get('raw_workflow_output', parsed)
+
+            if args.output:
+                with open(args.output, 'w', encoding='utf-8') as f:
+                    json.dump(output_payload, f, ensure_ascii=False, indent=2)
+                print(f"JSON 结果已保存：{args.output}", file=sys.stderr)
+            else:
+                print(json.dumps(output_payload, ensure_ascii=False, indent=2))
         
         return 0
     

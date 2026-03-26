@@ -1,0 +1,54 @@
+{
+  "jobs": 4,
+  "tasks": [
+    {
+      "id": "01-cover",
+      "promptFiles": ["prompts/01-cover-mazda-ez60-reasons.md"],
+      "image": "01-cover-mazda-ez60-reasons.png",
+      "provider": "dashscope",
+      "model": "wanx2.1-t2i-turbo",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "02-content-1-3",
+      "promptFiles": ["prompts/02-content-reasons-1-3.md"],
+      "image": "02-content-reasons-1-3.png",
+      "provider": "dashscope",
+      "model": "wanx2.1-t2i-turbo",
+      "ar": "3:4",
+      "quality": "2k",
+      "ref": ["01-cover-mazda-ez60-reasons.png"]
+    },
+    {
+      "id": "03-content-4-6",
+      "promptFiles": ["prompts/03-content-reasons-4-6.md"],
+      "image": "03-content-reasons-4-6.png",
+      "provider": "dashscope",
+      "model": "wanx2.1-t2i-turbo",
+      "ar": "3:4",
+      "quality": "2k",
+      "ref": ["01-cover-mazda-ez60-reasons.png"]
+    },
+    {
+      "id": "04-content-7-10",
+      "promptFiles": ["prompts/04-content-reasons-7-10.md"],
+      "image": "04-content-reasons-7-10.png",
+      "provider": "dashscope",
+      "model": "wanx2.1-t2i-turbo",
+      "ar": "3:4",
+      "quality": "2k",
+      "ref": ["01-cover-mazda-ez60-reasons.png"]
+    },
+    {
+      "id": "05-ending",
+      "promptFiles": ["prompts/05-ending-mazda-ez60-reasons.md"],
+      "image": "05-ending-mazda-ez60-reasons.png",
+      "provider": "dashscope",
+      "model": "wanx2.1-t2i-turbo",
+      "ar": "3:4",
+      "quality": "2k",
+      "ref": ["01-cover-mazda-ez60-reasons.png"]
+    }
+  ]
+}

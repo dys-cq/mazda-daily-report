@@ -1,0 +1,40 @@
+{
+  "jobs": 4,
+  "tasks": [
+    {
+      "id": "01-cover",
+      "promptFiles": ["prompts/01-cover-mazda-ez60.md"],
+      "image": "01-cover-mazda-ez60.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "02-reasons1-3",
+      "promptFiles": ["prompts/02-content-reasons1-3.md"],
+      "image": "02-content-reasons1-3.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "03-reasons4-6",
+      "promptFiles": ["prompts/03-content-reasons4-6.md"],
+      "image": "03-content-reasons4-6.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "04-reasons7-10",
+      "promptFiles": ["prompts/04-content-reasons7-10.md"],
+      "image": "04-content-reasons7-10.png",
+      "ar": "3:4",
+      "quality": "2k"
+    },
+    {
+      "id": "05-ending",
+      "promptFiles": ["prompts/05-ending-cta.md"],
+      "image": "05-ending-cta.png",
+      "ar": "3:4",
+      "quality": "2k"
+    }
+  ]
+}

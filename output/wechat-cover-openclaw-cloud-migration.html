@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>公众号封面 - OpenClaw 云端迁移</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(70, 190, 255, 0.22), transparent 24%),
+        radial-gradient(circle at 84% 16%, rgba(119, 102, 255, 0.22), transparent 26%),
+        radial-gradient(circle at 72% 82%, rgba(58, 255, 196, 0.16), transparent 30%),
+        linear-gradient(135deg, #07121f 0%, #0c1d33 46%, #102645 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+    body {
+      min-width: 1600px;
+      min-height: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+    .cover {
+      width: 1600px;
+      height: 900px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.18;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4));
+    }
+    .blob1, .blob2, .blob3, .ring {
+      position: absolute;
+      pointer-events: none;
+    }
+    .blob1 {
+      width: 520px; height: 520px;
+      left: -160px; top: -130px;
+      background: radial-gradient(circle, rgba(70,190,255,0.24), transparent 70%);
+      filter: blur(24px);
+    }
+    .blob2 {
+      width: 460px; height: 460px;
+      right: -90px; top: 90px;
+      background: radial-gradient(circle, rgba(119,102,255,0.24), transparent 72%);
+      filter: blur(22px);
+    }
+    .blob3 {
+      width: 420px; height: 420px;
+      right: 260px; bottom: -140px;
+      background: radial-gradient(circle, rgba(58,255,196,0.16), transparent 70%);
+      filter: blur(26px);
+    }
+    .ring {
+      width: 560px;
+      height: 560px;
+      right: 100px;
+      bottom: -170px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.10);
+      box-shadow: 0 0 120px rgba(70,190,255,0.10);
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.14fr 0.86fr;
+      gap: 34px;
+      padding: 62px 68px;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .topline {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      width: fit-content;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      margin-bottom: 28px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #d8f8ff;
+      letter-spacing: 0.4px;
+      backdrop-filter: blur(10px);
+    }
+    .dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: linear-gradient(135deg, #46beff, #7766ff);
+      box-shadow: 0 0 18px rgba(70,190,255,0.7);
+    }
+    h1 {
+      font-size: 82px;
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: -2.2px;
+      max-width: 920px;
+      text-shadow: 0 10px 28px rgba(0,0,0,0.26);
+    }
+    .cyan { color: #85edff; }
+    .mint { color: #76ffd5; }
+    .violet { color: #c5b8ff; }
+    .sub {
+      margin-top: 28px;
+      font-size: 30px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+      max-width: 860px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .chip {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.92);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .panel {
+      width: 100%;
+      max-width: 510px;
+      border-radius: 34px;
+      padding: 26px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 60px rgba(0,0,0,0.22);
+      backdrop-filter: blur(12px);
+    }
+    .window {
+      border-radius: 26px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #eef7ff, #e6f0ff 46%, #f3f0ff 100%);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+    }
+    .window-top {
+      height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 18px;
+      background: rgba(255,255,255,0.78);
+      border-bottom: 1px solid rgba(44,52,84,0.08);
+    }
+    .window-top span {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #ff8a8a;
+    }
+    .window-top span:nth-child(2) { background: #ffd86b; }
+    .window-top span:nth-child(3) { background: #61e294; }
+    .window-body {
+      position: relative;
+      padding: 26px;
+      min-height: 520px;
+    }
+    .mem-tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(88,103,242,0.12);
+      color: #4f58c7;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .mem-title {
+      font-size: 40px;
+      line-height: 1.16;
+      color: #1f2540;
+      font-weight: 950;
+      letter-spacing: -1px;
+    }
+    .mem-desc {
+      margin-top: 16px;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #46506a;
+      font-weight: 700;
+    }
+    .flow {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(40,52,88,0.06);
+    }
+    .step .num {
+      width: 48px; height: 48px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #22c7ff, #6e64ff);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(69,100,255,0.22);
+    }
+    .step .txt {
+      font-size: 22px;
+      line-height: 1.35;
+      color: #202741;
+      font-weight: 900;
+    }
+    .stamp {
+      position: absolute;
+      right: 24px;
+      bottom: 26px;
+      transform: rotate(-7deg);
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0d1624, #182842);
+      color: #9fefff;
+      border: 1px solid rgba(159,239,255,0.22);
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 18px 40px rgba(11,22,36,0.22);
+    }
+    .brand {
+      position: absolute;
+      left: 68px;
+      bottom: 42px;
+      z-index: 3;
+      font-size: 22px;
+      color: rgba(255,255,255,0.68);
+      font-weight: 800;
+      letter-spacing: 0.8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="grid"></div>
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <div class="blob3"></div>
+    <div class="ring"></div>
+
+    <div class="content">
+      <div class="left">
+        <div class="topline"><span class="dot"></span>OpenClaw 云端迁移攻略</div>
+        <h1>
+          别再从头装了：<br>
+          <span class="cyan">OpenClaw</span> 云端迁移，<br>
+          <span class="mint">4 步</span>就能<span class="violet">原样搬走</span>
+        </h1>
+        <div class="sub">
+          环境变量、插件、配置、工作流，一次打包迁走。不是重装一遍，而是把你已经调好的那套 OpenClaw，完整搬上云端继续跑。
+        </div>
+        <div class="chips">
+          <div class="chip">配置迁移</div>
+          <div class="chip">插件保留</div>
+          <div class="chip">环境变量</div>
+          <div class="chip">4 步完成</div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="panel">
+          <div class="window">
+            <div class="window-top"><span></span><span></span><span></span></div>
+            <div class="window-body">
+              <div class="mem-tag">CLOUD MIGRATION</div>
+              <div class="mem-title">把本地 OpenClaw<br>按原配置搬到云端</div>
+              <div class="mem-desc">保留你的插件、环境变量和工作方式，不用从 0 再折腾一遍。</div>
+              <div class="flow">
+                <div class="step"><div class="num">1</div><div class="txt">导出原有配置与环境变量</div></div>
+                <div class="step"><div class="num">2</div><div class="txt">迁移插件与依赖目录</div></div>
+                <div class="step"><div class="num">3</div><div class="txt">恢复网关与运行参数</div></div>
+                <div class="step"><div class="num">4</div><div class="txt">上线后直接按原样开跑</div></div>
+              </div>
+              <div class="stamp">LOCAL → CLOUD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand">OpenClaw · WeChat Cover · 900×383</div>
+  </div>
+</body>
+</html>

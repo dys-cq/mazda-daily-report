@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>公众号封面 - MemOS × OpenClaw</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(54, 208, 255, 0.22), transparent 24%),
+        radial-gradient(circle at 84% 20%, rgba(175, 95, 255, 0.20), transparent 26%),
+        radial-gradient(circle at 64% 82%, rgba(42, 255, 177, 0.16), transparent 32%),
+        linear-gradient(135deg, #07111c 0%, #0d1a2e 42%, #13243d 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+    body {
+      min-width: 1600px;
+      min-height: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+    .cover {
+      width: 1600px;
+      height: 900px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.18;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4));
+    }
+    .blob1, .blob2, .blob3, .ring {
+      position: absolute;
+      pointer-events: none;
+    }
+    .blob1 {
+      width: 500px; height: 500px;
+      left: -140px; top: -120px;
+      background: radial-gradient(circle, rgba(54,208,255,0.26), transparent 70%);
+      filter: blur(22px);
+    }
+    .blob2 {
+      width: 460px; height: 460px;
+      right: -100px; top: 80px;
+      background: radial-gradient(circle, rgba(175,95,255,0.24), transparent 72%);
+      filter: blur(20px);
+    }
+    .blob3 {
+      width: 420px; height: 420px;
+      right: 280px; bottom: -150px;
+      background: radial-gradient(circle, rgba(42,255,177,0.18), transparent 72%);
+      filter: blur(26px);
+    }
+    .ring {
+      width: 540px;
+      height: 540px;
+      right: 120px;
+      bottom: -160px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.10);
+      box-shadow: 0 0 120px rgba(54,208,255,0.10);
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.16fr 0.84fr;
+      gap: 34px;
+      padding: 62px 68px;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .topline {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      width: fit-content;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      margin-bottom: 28px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #d8f8ff;
+      letter-spacing: 0.4px;
+      backdrop-filter: blur(10px);
+    }
+    .dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: linear-gradient(135deg, #36d0ff, #af5fff);
+      box-shadow: 0 0 18px rgba(54,208,255,0.7);
+    }
+    h1 {
+      font-size: 82px;
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: -2.2px;
+      max-width: 900px;
+      text-shadow: 0 10px 28px rgba(0,0,0,0.26);
+    }
+    .cyan { color: #7cecff; }
+    .green { color: #72ffd2; }
+    .purple { color: #c5a8ff; }
+    .sub {
+      margin-top: 28px;
+      font-size: 30px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+      max-width: 860px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .chip {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.92);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .panel {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 34px;
+      padding: 26px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 60px rgba(0,0,0,0.22);
+      backdrop-filter: blur(12px);
+    }
+    .window {
+      border-radius: 26px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #eef7ff, #e6f0ff 46%, #f4f0ff 100%);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+    }
+    .window-top {
+      height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 18px;
+      background: rgba(255,255,255,0.78);
+      border-bottom: 1px solid rgba(44,52,84,0.08);
+    }
+    .window-top span {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #ff8a8a;
+    }
+    .window-top span:nth-child(2) { background: #ffd86b; }
+    .window-top span:nth-child(3) { background: #61e294; }
+    .window-body {
+      position: relative;
+      padding: 26px;
+      min-height: 520px;
+    }
+    .mem-tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(88,103,242,0.12);
+      color: #4f58c7;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .mem-title {
+      font-size: 42px;
+      line-height: 1.16;
+      color: #1f2540;
+      font-weight: 950;
+      letter-spacing: -1px;
+    }
+    .mem-desc {
+      margin-top: 16px;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #46506a;
+      font-weight: 700;
+    }
+    .flow {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(40,52,88,0.06);
+    }
+    .step .num {
+      width: 48px; height: 48px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1dcfff, #8b5bff);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(69,100,255,0.22);
+    }
+    .step .txt {
+      font-size: 22px;
+      line-height: 1.35;
+      color: #202741;
+      font-weight: 900;
+    }
+    .token {
+      position: absolute;
+      right: 26px;
+      bottom: 24px;
+      transform: rotate(-8deg);
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0b1624, #182842);
+      color: #ffd98a;
+      border: 1px solid rgba(255,217,138,0.22);
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 18px 40px rgba(11,22,36,0.22);
+    }
+    .brand {
+      position: absolute;
+      left: 68px;
+      bottom: 42px;
+      z-index: 3;
+      font-size: 22px;
+      color: rgba(255,255,255,0.68);
+      font-weight: 800;
+      letter-spacing: 0.8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="grid"></div>
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <div class="blob3"></div>
+    <div class="ring"></div>
+
+    <div class="content">
+      <div class="left">
+        <div class="topline"><span class="dot"></span>OpenClaw × MemOS 实战</div>
+        <h1>
+          别再拿 <span class="cyan">Token</span> 烧香了：<br>
+          给 <span class="green">OpenClaw</span> 装上 <span class="purple">MemOS</span>，<br>
+          本地 Agent 终于有“长期脑子”了
+        </h1>
+        <div class="sub">
+          不只是“记住上一句”，而是把本地 Agent 从临时应答器，升级成能持续积累上下文、偏好与任务脉络的长期协作体。
+        </div>
+        <div class="chips">
+          <div class="chip">长期记忆</div>
+          <div class="chip">本地 Agent</div>
+          <div class="chip">Recall Filter</div>
+          <div class="chip">多 Agent 协作</div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="panel">
+          <div class="window">
+            <div class="window-top"><span></span><span></span><span></span></div>
+            <div class="window-body">
+              <div class="mem-tag">MEMORY SYSTEM</div>
+              <div class="mem-title">给 Agent 装上<br>可检索、可沉淀、可长期复用的脑子</div>
+              <div class="mem-desc">不是硬塞上下文，不是无限堆 Token，而是把“记忆”变成真正可管理的系统能力。</div>
+              <div class="flow">
+                <div class="step"><div class="num">1</div><div class="txt">写入关键经验与上下文</div></div>
+                <div class="step"><div class="num">2</div><div class="txt">按场景精准召回相关记忆</div></div>
+                <div class="step"><div class="num">3</div><div class="txt">让本地 Agent 越用越懂你</div></div>
+              </div>
+              <div class="token">TOKEN ≠ MEMORY</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand">OpenClaw · WeChat Cover · 900×383</div>
+  </div>
+</body>
+</html>

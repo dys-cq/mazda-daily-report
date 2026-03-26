@@ -1,0 +1,5 @@
+﻿file 'C:\Users\Administrator\.openclaw\workspace\output\video_remix_full\work\asset_寮€澶撮挬瀛?mp4'
+file 'C:\Users\Administrator\.openclaw\workspace\output\video_remix_full\work\asset_鐥涚偣寮曞叆.mp4'
+file 'C:\Users\Administrator\.openclaw\workspace\output\video_remix_full\work\asset_浜у搧浠嬬粛.mp4'
+file 'C:\Users\Administrator\.openclaw\workspace\output\video_remix_full\work\asset_鍗栫偣灞曠ず.mp4'
+file 'C:\Users\Administrator\.openclaw\workspace\output\video_remix_full\work\asset_琛屽姩鍙峰彫.mp4'

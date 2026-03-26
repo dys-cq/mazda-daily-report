@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人 SWOT 分析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .quadrant {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .quadrant h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+        }
+        .strengths h2 { border-color: #3b82f6; color: #3b82f6; }
+        .weaknesses h2 { border-color: #f59e0b; color: #f59e0b; }
+        .opportunities h2 { border-color: #10b981; color: #10b981; }
+        .threats h2 { border-color: #ef4444; color: #ef4444; }
+        .quadrant ul {
+            list-style: none;
+        }
+        .quadrant li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            line-height: 1.6;
+        }
+        .quadrant li:last-child {
+            border-bottom: none;
+        }
+        .quadrant li strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .strengths li strong { color: #3b82f6; }
+        .weaknesses li strong { color: #f59e0b; }
+        .opportunities li strong { color: #10b981; }
+        .threats li strong { color: #ef4444; }
+        .icon {
+            font-size: 1.3em;
+            margin-right: 8px;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            h1 {
+                color: #333;
+                text-shadow: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .swot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 个人 SWOT 分析</h1>
+        
+        <div class="swot-grid">
+            <!-- Strengths -->
+            <div class="quadrant strengths">
+                <h2>💪 S | Strengths 优势</h2>
+                <ul>
+                    <li>
+                        <strong>✅ 强责任心与结果意识</strong>
+                        接到目标会主动扛事，把事情推进到"有结论、有交付"
+                    </li>
+                    <li>
+                        <strong>✅ 逻辑清晰、结构化表达</strong>
+                        能把复杂问题拆解成关键点、优先级和行动计划
+                    </li>
+                    <li>
+                        <strong>✅ 学习与复盘能力强</strong>
+                        做完会复盘沉淀方法，下一次更快、更稳
+                    </li>
+                    <li>
+                        <strong>✅ 沟通与协同可靠</strong>
+                        能对齐预期、减少信息差，让协作过程更顺畅
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Weaknesses -->
+            <div class="quadrant weaknesses">
+                <h2>⚠️ W | Weaknesses 劣势</h2>
+                <ul>
+                    <li>
+                        <strong>🎯 完美主义倾向</strong>
+                        标准高、细节敏感；优点是质量稳，副作用是容易在非关键细节上耗时
+                    </li>
+                    <li>
+                        <strong>🔧 改进措施</strong>
+                        • 用"重要/不重要"+"截止时间"做取舍<br>
+                        • 设定"完成标准"而非"完美标准"<br>
+                        • 关键决策点明确"结论、Owner、DDL"
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Opportunities -->
+            <div class="quadrant opportunities">
+                <h2>🚀 O | Opportunities 机会</h2>
+                <ul>
+                    <li>
+                        <strong>📈 更高职责/更大平台</strong>
+                        带来的视野与资源，把结构化能力放大成"体系与团队能力"
+                    </li>
+                    <li>
+                        <strong>💡 可迁移能力的升级</strong>
+                        从"把事做成"走向"搭机制、带团队、可复制"
+                    </li>
+                    <li>
+                        <strong>🌟 个人影响力提升</strong>
+                        通过方法论沉淀、经验分享与带教，形成长期竞争力
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Threats -->
+            <div class="quadrant threats">
+                <h2>🔴 T | Threats 风险</h2>
+                <ul>
+                    <li>
+                        <strong>😰 高标准带来的压力与内耗</strong>
+                        容易把自己拉满 → 需要节奏管理与边界感
+                    </li>
+                    <li>
+                        <strong>🔄 目标多/变化快导致分心</strong>
+                        如果优先级不清会被动 → 需要更强的取舍与聚焦
+                    </li>
+                    <li>
+                        <strong>⚙️ 依赖个人能力而非机制</strong>
+                        短期有效、长期不可持续 → 需要"制度化/流程化/工具化"
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

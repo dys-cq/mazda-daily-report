@@ -60,6 +60,7 @@ uv run python scripts/call_coze_workflow.py product.docx --api-token sat_xxx
 | `--workflow-id` | 扣子工作流 ID | `7619646208533250090` |
 | `--api-token` | 扣子 API Token | 环境变量 `COZE_API_TOKEN` |
 | `--output`, `-o` | 输出文件路径 | 标准输出 |
+| `--product-name` | 手工指定 Product_name，优先级高于文件名识别 | 从文件名自动识别 |
 
 ## 工作流参数
 

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信公众号文章</title>
+    <style>
+        :root {
+            
+  --primary-color: #7c3aed;        /* 主色调：紫色 */
+  --secondary-color: #3b82f6;      /* 辅助色：蓝色 */
+  --text-color: #333333;           /* 正文颜色 */
+  --text-light: #666666;           /* 浅色文字 */
+  --background: #ffffff;           /* 背景色 */
+  --code-bg: #282c34;              /* 代码块背景 */
+  --code-color: #abb2bf;           /* 代码文字 */
+  --quote-border: #7c3aed;         /* 引用边框 */
+  --quote-bg: #f8f5ff;             /* 引用背景 */
+  --border-radius: 8px;            /* 圆角半径 */
+
+        }
+
+        /* 基础样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            background: #fff;
+            padding: 20px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- ⚠️ 标题请在微信公众号编辑器中单独填写，HTML 中已自动移除 H1 标题 -->
+    <blockquote style="margin: 20px 0; padding: 16px 20px; background: #f8f5ff; border-left: 4px solid #7c3aed; border-radius: 0 8px 8px 0; color: #666666; font-style: italic">
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">不用 Google、不用百度，这款开源元搜索引擎聚合了 242+ 搜索服务，不追踪、不画像、不记录，完全掌控你的搜索隐私</p>
+</blockquote>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">为什么你需要 SearXNG？</h2>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">想象一下这个场景：</p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">你在搜索引擎里查了一次"感冒吃什么药"，接下来一周，所有平台都在给你推送药品广告；你搜索了一次"考研培训机构"，从此各种教育广告如影随形。</p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">这不是巧合，这是追踪。</strong></p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">传统搜索引擎会记录你的每一次搜索、点击、停留时间，构建详细的用户画像，然后卖给广告商。你的隐私，成了他们的生意。</p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">但今天，我要介绍一款彻底改变这一现状的开源神器——<strong style="font-weight: 600; color: #1a1a1a">SearXNG</strong>。</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">SearXNG 是什么？</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">SearXNG 是一个<strong style="font-weight: 600; color: #1a1a1a">免费的互联网元搜索引擎</strong>，它本身不提供搜索结果，而是聚合来自 Google、Bing、DuckDuckGo、百度等 242+ 搜索服务的数据。</p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">核心特点：</strong></p>
+<ul style="margin: 16px 0; padding-left: 28px">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">🔒 <strong style="font-weight: 600; color: #1a1a1a">零追踪</strong>：不记录搜索历史，不创建用户画像</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">🏠 <strong style="font-weight: 600; color: #1a1a1a">自托管</strong>：部署在自己服务器上，完全掌控数据</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">🔍 <strong style="font-weight: 600; color: #1a1a1a">多引擎聚合</strong>：一次搜索，获取多个搜索引擎的结果</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">🌍 <strong style="font-weight: 600; color: #1a1a1a">58 种语言</strong>：支持全球主流语言</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">🧩 <strong style="font-weight: 600; color: #1a1a1a">70+ 插件</strong>：丰富的扩展功能</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">📊 <strong style="font-weight: 600; color: #1a1a1a">27k+ Stars</strong>：GitHub 热门开源项目</li>
+</ul>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">隐私保护有多彻底？</h3>
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; overflow-x: auto; display: block">
+<thead style="background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); color: #fff">
+<tr>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">功能</th>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">Google/百度</th>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">SearXNG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">搜索历史</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">✅ 记录</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">❌ 不记录</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">用户画像</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">✅ 创建</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">❌ 不创建</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">Cookie 追踪</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">✅ 使用</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">❌ 无 Cookie</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">广告推送</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">✅ 基于画像</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">❌ 无广告</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">数据存储</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">✅ 云端</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">❌ 本地</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">代码审计</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">❌ 闭源</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">✅ 开源</td>
+</tr>
+</tbody>
+</table>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">10 分钟 Docker 部署指南</h2>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">环境要求</h3>
+<ul style="margin: 16px 0; padding-left: 28px">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">Windows 10/11 或 Linux/macOS</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">Docker Desktop 已安装</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">5 分钟空闲时间</li>
+</ul>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">步骤一：检查 Docker</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">打开 PowerShell（Windows）或终端（macOS/Linux），运行：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>docker<span class="w"> </span>--version
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">看到类似输出说明 Docker 已安装：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>Docker version 29.1.3, build f52814d
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">步骤二：创建配置目录</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="nb">cd</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\.</span>openclaw<span class="se">\w</span>orkspace
+mkdir<span class="w"> </span>searxng<span class="se">\c</span>onfig<span class="w"> </span>searxng<span class="se">\d</span>ata
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">步骤三：拉取镜像并启动</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>docker<span class="w"> </span>pull<span class="w"> </span>docker.io/searxng/searxng:latest
+
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>searxng<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8080<span class="w"> </span>^
+<span class="w">  </span>-v<span class="w"> </span><span class="s2">".\searxng\config:/etc/searxng"</span><span class="w"> </span>^
+<span class="w">  </span>-v<span class="w"> </span><span class="s2">".\searxng\data:/var/cache/searxng"</span><span class="w"> </span>^
+<span class="w">  </span>docker.io/searxng/searxng:latest
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">步骤四：启用 API 格式</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">默认配置只启用了 HTML 格式，需要编辑配置文件启用 JSON/CSV 格式：</p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">编辑 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>searxng\config\settings.yml</code>，找到 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>formats</code> 部分：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="nt">formats</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">html</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">json</span><span class="w">    </span><span class="c1"># 添加这行</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">csv</span><span class="w">     </span><span class="c1"># 添加这行</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rss</span><span class="w">     </span><span class="c1"># 添加这行</span>
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">然后重启容器：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>docker<span class="w"> </span>restart<span class="w"> </span>searxng
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">步骤五：验证部署</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">等待 5 秒后，在浏览器访问：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>http://localhost:8888
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">看到搜索界面说明部署成功！</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">常用管理命令</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>docker<span class="w"> </span>ps<span class="w"> </span>--filter<span class="w"> </span><span class="nv">name</span><span class="o">=</span>searxng
+
+docker<span class="w"> </span>logs<span class="w"> </span>searxng
+
+docker<span class="w"> </span>stop<span class="w"> </span>searxng
+
+docker<span class="w"> </span>start<span class="w"> </span>searxng
+
+docker<span class="w"> </span>restart<span class="w"> </span>searxng
+
+docker<span class="w"> </span>rm<span class="w"> </span>searxng
+</code></pre></div>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">深度集成 OpenClaw：创建 searxng-search 技能</h2>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">部署完成后，我们可以将 SearXNG 集成到 OpenClaw AI 助手中，创建一个专用的搜索技能。</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">技能结构</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>searxng-search/
+├── SKILL.md                    # 技能说明文档
+├── scripts/
+│   └── searxng_search.py      # Python 搜索脚本
+├── .env                        # 环境配置
+└── .env.example                # 配置示例
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">核心功能</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">1. 多格式输出</strong></p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">支持 JSON、CSV、RSS、HTML 四种格式：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"machine learning"</span>
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"python"</span><span class="w"> </span>--format<span class="w"> </span>csv
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"AI news"</span><span class="w"> </span>--format<span class="w"> </span>rss
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">2. 分类别搜索</strong></p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">支持 9 大搜索类别：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"openclaw"</span><span class="w"> </span>--categories<span class="w"> </span>general
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"sunset"</span><span class="w"> </span>--categories<span class="w"> </span>images
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"tutorial"</span><span class="w"> </span>--categories<span class="w"> </span>videos
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"tech news"</span><span class="w"> </span>--categories<span class="w"> </span>news
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"quantum"</span><span class="w"> </span>--categories<span class="w"> </span>science
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"python tutorial"</span><span class="w"> </span>--categories<span class="w"> </span>it
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">3. 时间范围过滤</strong></p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"AI news"</span><span class="w"> </span>--time-range<span class="w"> </span>day
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"openclaw"</span><span class="w"> </span>--time-range<span class="w"> </span>week
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"python"</span><span class="w"> </span>--time-range<span class="w"> </span>month
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">4. 指定搜索引擎</strong></p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"privacy"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--engines<span class="w"> </span>duckduckgo,startpage,qwant
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"google alternative"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--engines<span class="w"> </span>google,bing,yahoo
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">5. 安全搜索级别</strong></p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"general"</span><span class="w"> </span>--safesearch<span class="w"> </span><span class="m">0</span>
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"general"</span><span class="w"> </span>--safesearch<span class="w"> </span><span class="m">1</span>
+
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"general"</span><span class="w"> </span>--safesearch<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">Python API 调用</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">在 Python 代码中直接调用：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="kn">from</span><span class="w"> </span><span class="nn">scripts.searxng_search</span><span class="w"> </span><span class="kn">import</span> <span class="n">search</span><span class="p">,</span> <span class="n">format_results</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="s2">"quantum computing"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_results</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span>
+    <span class="s2">"machine learning"</span><span class="p">,</span>
+    <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s2">"science"</span><span class="p">,</span> <span class="s2">"it"</span><span class="p">],</span>
+    <span class="n">time_range</span><span class="o">=</span><span class="s2">"year"</span><span class="p">,</span>
+    <span class="n">engines</span><span class="o">=</span><span class="p">[</span><span class="s2">"google scholar"</span><span class="p">,</span> <span class="s2">"arxiv"</span><span class="p">,</span> <span class="s2">"pubmed"</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">'results'</span><span class="p">][:</span><span class="mi">10</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   URL: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'url'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   来源：</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'engine'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">OpenClaw 集成</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">在 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>openclaw.json</code> 中启用技能：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="p">{</span>
+<span class="w">  </span><span class="nt">"skills"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"searxng-search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">重启 Gateway 后，可以直接在对话中使用：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>"用 SearXNG 搜索最新的 AI 新闻"
+"查找 Python 教程"
+"搜索开源项目图片"
+</code></pre></div>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">高级配置技巧</h2>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">启用更多搜索引擎</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">编辑 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>settings.yml</code>，找到 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>engines</code> 部分，将需要的引擎 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>disabled: true</code> 改为 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>disabled: false</code>：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="nt">engines</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">google</span>
+<span class="w">    </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">google</span>
+<span class="w">    </span><span class="nt">shortcut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">go</span>
+<span class="w">    </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># 改为 false 启用</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bing</span>
+<span class="w">    </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bing</span>
+<span class="w">    </span><span class="nt">shortcut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bi</span>
+<span class="w">    </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># 改为 false 启用</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">duckduckgo</span>
+<span class="w">    </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">duckduckgo</span>
+<span class="w">    </span><span class="nt">shortcut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ddg</span>
+<span class="w">    </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># 保持启用</span>
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">配置图像代理</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">保护图片搜索隐私，在 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>settings.yml</code> 中添加：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image_proxy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># 通过 SearXNG 代理图片</span>
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">设置速率限制</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">防止滥用，启用速率限制：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">limiter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># 启用速率限制</span>
+<span class="w">  </span><span class="nt">public_instance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># 私有实例设为 false</span>
+</code></pre></div>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">自定义主题</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">SearXNG 支持多种主题，在 <code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>settings.yml</code> 中配置：</p>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'><span class="nt">ui</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">default_theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple</span><span class="w">  </span><span class="c1"># 可选：simple, oscar, pixart</span>
+<span class="w">  </span><span class="nt">theme_args</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">simple_style</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dark</span><span class="w">  </span><span class="c1"># 可选：auto, light, dark, black</span>
+</code></pre></div>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">实际应用场景</h2>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">场景一：学术研究</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"transformer architecture"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--categories<span class="w"> </span>science<span class="w"> </span>--time-range<span class="w"> </span>year
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">优势</strong>：聚合 Google Scholar、arXiv、PubMed 等多个学术数据库</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">场景二：竞品分析</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"competitor name"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--categories<span class="w"> </span>news<span class="w"> </span>--time-range<span class="w"> </span>week
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">优势</strong>：一次性获取多个新闻源，避免信息茧房</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">场景三：开发资源查找</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"python async await"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--categories<span class="w"> </span>it<span class="w"> </span>--engines<span class="w"> </span>github,stackoverflow,pypi
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">优势</strong>：同时搜索 GitHub、StackOverflow、PyPI</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">场景四：隐私保护日常搜索</h3>
+<div class="codehilite"><pre style="background: #282c34; color: #abb2bf; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 20px 0; line-height: 1.6; position: relative"><span></span><code style='background: #f5f5f5; color: #e83e8c; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 0.9em; font-weight: 500'>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>scripts/searxng_search.py<span class="w"> </span><span class="s2">"recipe"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--safesearch<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">优势</strong>：无追踪、无广告、无画像</p>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">性能测试数据</h2>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">我们进行了多轮测试，结果如下：</p>
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; overflow-x: auto; display: block">
+<thead style="background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); color: #fff">
+<tr>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">测试项目</th>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">响应时间</th>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">结果数量</th>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">引擎数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">简单搜索</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">&lt;1s</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">21+</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">3</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">分类搜索</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">&lt;2s</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">10+</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">2</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">时间过滤</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">&lt;1.5s</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">15+</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">2</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">多引擎聚合</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">&lt;3s</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">50+</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">5</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">CSV 导出</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">&lt;1s</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">25+</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">3</td>
+</tr>
+</tbody>
+</table>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">结论</strong>：在本地部署的情况下，搜索速度与主流搜索引擎相当，但隐私保护级别显著提升。</p>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">常见问题解答</h2>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">Q1：SearXNG 和 SearX 有什么区别？</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">A</strong>：SearXNG 是 SearX 的分支（fork），始于 2021 年。主要改进：</p>
+<ul style="margin: 16px 0; padding-left: 28px">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">更活跃的维护社区</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">更好的文档</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">更多的搜索引擎支持</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">改进的隐私保护</li>
+</ul>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">Q2：公共实例和自托管有什么区别？</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">A</strong>：</p>
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; overflow-x: auto; display: block">
+<thead style="background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); color: #fff">
+<tr>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">特性</th>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">公共实例</th>
+<th style="padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid #dee2e6">自托管</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">隐私保护</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">取决于实例管理员</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">完全掌控</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">配置自由</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">受限</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">完全自定义</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">维护成本</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">无</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">需要自己维护</td>
+</tr>
+<tr>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">推荐度</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">⭐⭐⭐</td>
+<td style="padding: 12px 16px; border: 1px solid #dee2e6">⭐⭐⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">建议</strong>：敏感搜索使用自托管，一般搜索可使用可信的公共实例。</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">Q3：搜索结果质量如何？</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">A</strong>：SearXNG 本身不产生搜索结果，而是聚合其他引擎的结果。质量取决于：</p>
+<ul style="margin: 16px 0; padding-left: 28px">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">启用的搜索引擎数量</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">各引擎的 API 稳定性</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">网络延迟</li>
+</ul>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">建议</strong>：启用 5-10 个主流引擎，平衡质量和速度。</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">Q4：是否需要科学上网？</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">A</strong>：取决于你启用的搜索引擎：</p>
+<ul style="margin: 16px 0; padding-left: 28px">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">只启用国内引擎（百度、搜狗等）→ 不需要</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">启用 Google、Bing 等国际引擎 → 可能需要</li>
+</ul>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">建议</strong>：根据网络环境选择合适的引擎组合。</p>
+<h3 style="font-size: 20px; font-weight: 600; color: #1a1a1a; margin: 24px 0 16px 0; padding-left: 12px; border-left: 3px solid #7c3aed; line-height: 1.4">Q5：数据会保存多久？</h3>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">A</strong>：SearXNG 默认不保存任何搜索数据。但以下情况例外：</p>
+<ul style="margin: 16px 0; padding-left: 28px">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">浏览器可能保存本地历史</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">网络中间节点可能记录（使用 HTTPS 可避免）</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative">自托管实例的日志（可配置关闭）</li>
+</ul>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">建议</strong>：定期清理浏览器历史，使用隐私模式浏览。</p>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<h2 style="font-size: 24px; font-weight: 600; color: #1a1a1a; margin: 28px 0 20px 0; padding-bottom: 12px; border-bottom: 2px solid transparent; background-image: linear-gradient(90deg, #7c3aed 0%, #3b82f6 50%, transparent 50%); background-size: 100% 2px; background-position: 0 100%; background-repeat: no-repeat; line-height: 1.4">总结</h2>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">SearXNG 不仅仅是一个搜索引擎，更是一种<strong style="font-weight: 600; color: #1a1a1a">隐私保护的生活方式</strong>。</p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">在这个数据即金钱的时代，你的每一次搜索都在被记录、分析、售卖。SearXNG 提供了一个简单而优雅的解决方案：</p>
+<ul style="margin: 16px 0; padding-left: 28px">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative"><strong style="font-weight: 600; color: #1a1a1a">不追踪</strong>：没有搜索历史，没有用户画像</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative"><strong style="font-weight: 600; color: #1a1a1a">不画像</strong>：不会根据你的搜索推送广告</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative"><strong style="font-weight: 600; color: #1a1a1a">可自托管</strong>：完全掌控自己的数据</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative"><strong style="font-weight: 600; color: #1a1a1a">开源透明</strong>：代码公开，任何人都可以审计</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; position: relative"><strong style="font-weight: 600; color: #1a1a1a">多引擎聚合</strong>：一次搜索，获取全网信息</li>
+</ul>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">10 分钟部署，终身隐私保护。</strong></p>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word">这不仅仅是一次技术升级，更是一次隐私意识的觉醒。</p>
+<hr style="border: none; height: 2px; background: linear-gradient(90deg, transparent 0%, #7c3aed 50%, transparent 100%); margin: 32px 0"/>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">立即行动：</strong></p>
+<ol style="margin: 16px 0; padding-left: 28px; counter-reset: item">
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; counter-increment: item; position: relative">访问 GitHub：https://github.com/searxng/searxng</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; counter-increment: item; position: relative">查看文档：https://docs.searxng.org</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; counter-increment: item; position: relative">部署实例：参考本文 Docker 部署指南</li>
+<li style="margin: 8px 0; line-height: 1.8; list-style-type: none; counter-increment: item; position: relative">集成 OpenClaw：创建 searxng-search 技能</li>
+</ol>
+<p style="margin: 18px 0; text-align: justify; word-break: break-word"><strong style="font-weight: 600; color: #1a1a1a">你的搜索，应该只属于你自己。</strong></p>
+</body>
+</html>

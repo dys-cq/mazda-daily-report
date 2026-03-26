@@ -1,0 +1,13 @@
+﻿{
+  "articles": [
+    {
+      "title": "14:1 magic Mazda",
+      "author": "Nice",
+      "digest": "Mazda Skyactiv technology",
+      "content": "<section>$html</section>",
+      "thumb_media_id": "6xS4s_HryrtIjmhdHqwqvHk_CnILXLAplRa752y0aGbI0luS9ocUIufsxIEC3nwY",
+      "need_open_comment": 1,
+      "only_fans_can_comment": 0
+    }
+  ]
+}
