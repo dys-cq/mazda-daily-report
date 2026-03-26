@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang='zh-CN'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>KPI 每日全维度分析报告</title>
+  <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #2563eb;
+      --primary2: #0ea5e9;
+      --green: #10b981;
+      --orange: #f59e0b;
+      --red: #ef4444;
+      --shadow: 0 10px 30px rgba(15, 23, 42, .08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Microsoft YaHei", Arial, sans-serif; color: var(--text); background: linear-gradient(180deg,#eef4ff 0,#f8fbff 120px,var(--bg) 120px); }
+    .wrap { max-width: 1440px; margin: 0 auto; padding: 28px; }
+    .hero { background: linear-gradient(135deg,#1d4ed8,#0ea5e9); color: #fff; border-radius: 24px; padding: 28px 32px; box-shadow: var(--shadow); }
+    .hero h1 { margin: 0 0 8px; font-size: 34px; }
+    .hero p { margin: 0; opacity: .92; }
+    .top-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; margin: 20px 0 28px; }
+    .top-card, .panel, .chart-card, .store-section { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .top-card { padding: 18px 20px; }
+    .top-label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .top-value { font-size: 28px; font-weight: 700; }
+    .chart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-bottom: 24px; }
+    .chart-card { padding: 18px; }
+    .chart-card h3 { margin: 0 0 12px; font-size: 18px; }
+    .store-section { padding: 20px; margin-bottom: 24px; }
+    .store-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .store-header h2 { margin: 0; font-size: 26px; }
+    .store-code { color: var(--muted); margin-top: 4px; }
+    .mini-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin: 14px 0 18px; }
+    .mini-card { background: #f8fbff; border: 1px solid #e7eefc; border-radius: 14px; padding: 14px; }
+    .mini-label { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .mini-value { font-weight: 700; font-size: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .panel { padding: 16px; border: 1px solid #eef2f7; }
+    .panel.wide { grid-column: 1 / -1; }
+    .panel h3 { margin: 0 0 12px; font-size: 18px; }
+    table { width: 100%; border-collapse: collapse; }
+    .kv th, .kv td, table th, table td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; vertical-align: top; }
+    .kv th { width: 42%; color: var(--muted); font-weight: 600; }
+    table thead th { color: var(--muted); font-weight: 700; background: #fafcff; }
+    .empty { color: var(--muted); padding: 8px 0; }
+    .footer { text-align: center; color: var(--muted); padding: 10px 0 24px; }
+    @media (max-width: 1100px) { .top-grid, .mini-grid, .grid, .chart-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 720px) { .top-grid, .mini-grid, .grid, .chart-grid { grid-template-columns: 1fr; } .hero h1{font-size:28px} }
+  </style>
+</head>
+<body>
+  <div class='wrap'>
+    <section class='hero'>
+      <h1>KPI 每日全维度分析报告</h1>
+      <p>报告日期：2026-03-25 ｜ 生成时间：2026-03-26 14:44</p>
+    </section>
+
+    <section class='top-grid'>
+      <div class='top-card'><div class='top-label'>门店数量</div><div class='top-value'>5</div></div>
+      <div class='top-card'><div class='top-label'>总服务收入</div><div class='top-value'>3,270,668.02</div></div>
+      <div class='top-card'><div class='top-label'>总客诉/线索</div><div class='top-value'>44</div></div>
+      <div class='top-card'><div class='top-label'>CSI平均满意率</div><div class='top-value'>80.00%</div></div>
+    </section>
+
+    <section class='chart-grid'>
+      <div class='chart-card'>
+        <h3>各店服务总收入对比</h3>
+        <canvas id='incomeChart' height='120'></canvas>
+      </div>
+      <div class='chart-card'>
+        <h3>客诉 / 线索总数对比</h3>
+        <canvas id='leadChart' height='120'></canvas>
+      </div>
+    </section>
+
+    
+    <section class='store-section'>
+      <div class='store-header'>
+        <div>
+          <h2>重庆金团</h2>
+          <div class='store-code'>经销商代码：M18003</div>
+        </div>
+      </div>
+      <div class='mini-grid'><div class='mini-card'><div class='mini-label'>服务总收入</div><div class='mini-value'>810,136.90</div></div><div class='mini-card'><div class='mini-label'>客诉/线索总数</div><div class='mini-value'>8</div></div><div class='mini-card'><div class='mini-label'>CSI满意率</div><div class='mini-value'>100.00%</div></div><div class='mini-card'><div class='mini-label'>当前续保率</div><div class='mini-value'>8.87%</div></div></div>
+      <div class='grid'>
+        <div class='panel'><h3>经营数据</h3><table class='kv'><tr><th>服务总收入</th><td>810,136.90</td></tr><tr><th>零件总收入</th><td>549,342.56</td></tr><tr><th>工时总收入</th><td>260,794.34</td></tr><tr><th>进店台次(维修工单数)</th><td>488</td></tr><tr><th>保养台次</th><td>277</td></tr><tr><th>机油单车</th><td>308.52</td></tr><tr><th>事故单车</th><td>1,608.53</td></tr><tr><th>当月零附件目标</th><td>612,600.00</td></tr><tr><th>当月零附件达成</th><td>435,842.67</td></tr><tr><th>当月零附件达成率</th><td>71.15%</td></tr><tr><th>Q1零件目标</th><td>1,527,100.00</td></tr><tr><th>Q1零件达成</th><td>1,347,639.29</td></tr><tr><th>Q1零件达成率</th><td>88.25%</td></tr></table></div><div class='panel'><h3>保险平台</h3><table class='kv'><tr><th>新保出单</th><td>0</td></tr><tr><th>续保出单</th><td>0</td></tr><tr><th>续保录单</th><td>25</td></tr><tr><th>续保汇总</th><td>25</td></tr><tr><th>忠诚用户</th><td>3,381</td></tr><tr><th>当前续保率</th><td>8.87%</td></tr><tr><th>参考续保率（季度平均）</th><td>27.45%</td></tr><tr><th>当季度续保汇总累加</th><td>232</td></tr></table></div><div class='panel'><h3>客诉 / 线索</h3><table class='kv'><tr><th>总数</th><td>8</td></tr><tr><th>未关闭</th><td>1</td></tr><tr><th>已关闭</th><td>7</td></tr><tr><th>超时>0</th><td>0</td></tr></table></div><div class='panel'><h3>CSI</h3><table class='kv'><tr><th>本月维修合同数</th><td>342</td></tr><tr><th>评价客户数</th><td>58</td></tr><tr><th>参与率</th><td>16.96%</td></tr><tr><th>满意客户数</th><td>58</td></tr><tr><th>满意率</th><td>100.00%</td></tr></table></div><div class='panel'><h3>不满意客户清单</h3><div class='empty'>（本店无不满意客户）</div></div>
+      </div>
+    </section>
+    
+    <section class='store-section'>
+      <div class='store-header'>
+        <div>
+          <h2>重庆瀚达</h2>
+          <div class='store-code'>经销商代码：M23002</div>
+        </div>
+      </div>
+      <div class='mini-grid'><div class='mini-card'><div class='mini-label'>服务总收入</div><div class='mini-value'>478,420.25</div></div><div class='mini-card'><div class='mini-label'>客诉/线索总数</div><div class='mini-value'>6</div></div><div class='mini-card'><div class='mini-label'>CSI满意率</div><div class='mini-value'>100.00%</div></div><div class='mini-card'><div class='mini-label'>当前续保率</div><div class='mini-value'>0.64%</div></div></div>
+      <div class='grid'>
+        <div class='panel'><h3>经营数据</h3><table class='kv'><tr><th>服务总收入</th><td>478,420.25</td></tr><tr><th>零件总收入</th><td>301,288.35</td></tr><tr><th>工时总收入</th><td>177,131.90</td></tr><tr><th>进店台次(维修工单数)</th><td>240</td></tr><tr><th>保养台次</th><td>129</td></tr><tr><th>机油单车</th><td>239.27</td></tr><tr><th>事故单车</th><td>1,603.51</td></tr><tr><th>当月零附件目标</th><td>337,000.00</td></tr><tr><th>当月零附件达成</th><td>271,816.51</td></tr><tr><th>当月零附件达成率</th><td>80.66%</td></tr><tr><th>Q1零件目标</th><td>840,200.00</td></tr><tr><th>Q1零件达成</th><td>832,794.72</td></tr><tr><th>Q1零件达成率</th><td>99.12%</td></tr></table></div><div class='panel'><h3>保险平台</h3><table class='kv'><tr><th>新保出单</th><td>0</td></tr><tr><th>续保出单</th><td>0</td></tr><tr><th>续保录单</th><td>1</td></tr><tr><th>续保汇总</th><td>1</td></tr><tr><th>忠诚用户</th><td>1,878</td></tr><tr><th>当前续保率</th><td>0.64%</td></tr><tr><th>参考续保率（季度平均）</th><td>22.79%</td></tr><tr><th>当季度续保汇总累加</th><td>107</td></tr></table></div><div class='panel'><h3>客诉 / 线索</h3><table class='kv'><tr><th>总数</th><td>6</td></tr><tr><th>未关闭</th><td>0</td></tr><tr><th>已关闭</th><td>6</td></tr><tr><th>超时>0</th><td>0</td></tr></table></div><div class='panel'><h3>CSI</h3><table class='kv'><tr><th>本月维修合同数</th><td>147</td></tr><tr><th>评价客户数</th><td>61</td></tr><tr><th>参与率</th><td>41.50%</td></tr><tr><th>满意客户数</th><td>61</td></tr><tr><th>满意率</th><td>100.00%</td></tr></table></div><div class='panel'><h3>不满意客户清单</h3><div class='empty'>（本店无不满意客户）</div></div>
+      </div>
+    </section>
+    
+    <section class='store-section'>
+      <div class='store-header'>
+        <div>
+          <h2>重庆银马</h2>
+          <div class='store-code'>经销商代码：A28856</div>
+        </div>
+      </div>
+      <div class='mini-grid'><div class='mini-card'><div class='mini-label'>服务总收入</div><div class='mini-value'>1,029,256.87</div></div><div class='mini-card'><div class='mini-label'>客诉/线索总数</div><div class='mini-value'>13</div></div><div class='mini-card'><div class='mini-label'>CSI满意率</div><div class='mini-value'>100.00%</div></div><div class='mini-card'><div class='mini-label'>当前续保率</div><div class='mini-value'>7.08%</div></div></div>
+      <div class='grid'>
+        <div class='panel'><h3>经营数据</h3><table class='kv'><tr><th>服务总收入</th><td>1,029,256.87</td></tr><tr><th>零件总收入</th><td>668,176.05</td></tr><tr><th>工时总收入</th><td>361,080.83</td></tr><tr><th>进店台次(维修工单数)</th><td>605</td></tr><tr><th>保养台次</th><td>390</td></tr><tr><th>机油单车</th><td>275.08</td></tr><tr><th>事故单车</th><td>2,304.04</td></tr><tr><th>当月零附件目标</th><td>763,000.00</td></tr><tr><th>当月零附件达成</th><td>545,437.99</td></tr><tr><th>当月零附件达成率</th><td>71.49%</td></tr><tr><th>Q1零件目标</th><td>1,902,200.00</td></tr><tr><th>Q1零件达成</th><td>1,646,385.65</td></tr><tr><th>Q1零件达成率</th><td>86.55%</td></tr></table></div><div class='panel'><h3>保险平台</h3><table class='kv'><tr><th>新保出单</th><td>0</td></tr><tr><th>续保出单</th><td>4</td></tr><tr><th>续保录单</th><td>26</td></tr><tr><th>续保汇总</th><td>30</td></tr><tr><th>忠诚用户</th><td>5,083</td></tr><tr><th>当前续保率</th><td>7.08%</td></tr><tr><th>参考续保率（季度平均）</th><td>31.79%</td></tr><tr><th>当季度续保汇总累加</th><td>404</td></tr></table></div><div class='panel'><h3>客诉 / 线索</h3><table class='kv'><tr><th>总数</th><td>13</td></tr><tr><th>未关闭</th><td>0</td></tr><tr><th>已关闭</th><td>13</td></tr><tr><th>超时>0</th><td>0</td></tr></table></div><div class='panel'><h3>CSI</h3><table class='kv'><tr><th>本月维修合同数</th><td>411</td></tr><tr><th>评价客户数</th><td>153</td></tr><tr><th>参与率</th><td>37.23%</td></tr><tr><th>满意客户数</th><td>153</td></tr><tr><th>满意率</th><td>100.00%</td></tr></table></div><div class='panel'><h3>不满意客户清单</h3><div class='empty'>（本店无不满意客户）</div></div>
+      </div>
+    </section>
+    
+    <section class='store-section'>
+      <div class='store-header'>
+        <div>
+          <h2>重庆万事新</h2>
+          <div class='store-code'>经销商代码：M18571</div>
+        </div>
+      </div>
+      <div class='mini-grid'><div class='mini-card'><div class='mini-label'>服务总收入</div><div class='mini-value'>949,290.25</div></div><div class='mini-card'><div class='mini-label'>客诉/线索总数</div><div class='mini-value'>8</div></div><div class='mini-card'><div class='mini-label'>CSI满意率</div><div class='mini-value'>100.00%</div></div><div class='mini-card'><div class='mini-label'>当前续保率</div><div class='mini-value'>8.85%</div></div></div>
+      <div class='grid'>
+        <div class='panel'><h3>经营数据</h3><table class='kv'><tr><th>服务总收入</th><td>949,290.25</td></tr><tr><th>零件总收入</th><td>706,785.23</td></tr><tr><th>工时总收入</th><td>242,505.02</td></tr><tr><th>进店台次(维修工单数)</th><td>626</td></tr><tr><th>保养台次</th><td>306</td></tr><tr><th>机油单车</th><td>94.72</td></tr><tr><th>事故单车</th><td>1,933.61</td></tr><tr><th>当月零附件目标</th><td>640,000.00</td></tr><tr><th>当月零附件达成</th><td>338,591.64</td></tr><tr><th>当月零附件达成率</th><td>52.90%</td></tr><tr><th>Q1零件目标</th><td>1,620,000.00</td></tr><tr><th>Q1零件达成</th><td>1,614,327.23</td></tr><tr><th>Q1零件达成率</th><td>99.65%</td></tr></table></div><div class='panel'><h3>保险平台</h3><table class='kv'><tr><th>新保出单</th><td>0</td></tr><tr><th>续保出单</th><td>0</td></tr><tr><th>续保录单</th><td>30</td></tr><tr><th>续保汇总</th><td>30</td></tr><tr><th>忠诚用户</th><td>4,070</td></tr><tr><th>当前续保率</th><td>8.85%</td></tr><tr><th>参考续保率（季度平均）</th><td>30.66%</td></tr><tr><th>当季度续保汇总累加</th><td>312</td></tr></table></div><div class='panel'><h3>客诉 / 线索</h3><table class='kv'><tr><th>总数</th><td>8</td></tr><tr><th>未关闭</th><td>1</td></tr><tr><th>已关闭</th><td>7</td></tr><tr><th>超时>0</th><td>0</td></tr></table></div><div class='panel'><h3>CSI</h3><table class='kv'><tr><th>本月维修合同数</th><td>491</td></tr><tr><th>评价客户数</th><td>127</td></tr><tr><th>参与率</th><td>25.87%</td></tr><tr><th>满意客户数</th><td>127</td></tr><tr><th>满意率</th><td>100.00%</td></tr></table></div><div class='panel'><h3>不满意客户清单</h3><div class='empty'>（本店无不满意客户）</div></div>
+      </div>
+    </section>
+    
+    <section class='store-section'>
+      <div class='store-header'>
+        <div>
+          <h2>西藏鼎恒</h2>
+          <div class='store-code'>经销商代码：M18912</div>
+        </div>
+      </div>
+      <div class='mini-grid'><div class='mini-card'><div class='mini-label'>服务总收入</div><div class='mini-value'>3,563.75</div></div><div class='mini-card'><div class='mini-label'>客诉/线索总数</div><div class='mini-value'>9</div></div><div class='mini-card'><div class='mini-label'>CSI满意率</div><div class='mini-value'>0.00%</div></div><div class='mini-card'><div class='mini-label'>当前续保率</div><div class='mini-value'>0.00%</div></div></div>
+      <div class='grid'>
+        <div class='panel'><h3>经营数据</h3><table class='kv'><tr><th>服务总收入</th><td>3,563.75</td></tr><tr><th>零件总收入</th><td>2,677.75</td></tr><tr><th>工时总收入</th><td>886.00</td></tr><tr><th>进店台次(维修工单数)</th><td>8</td></tr><tr><th>保养台次</th><td>2</td></tr><tr><th>机油单车</th><td>0.00</td></tr><tr><th>事故单车</th><td>-</td></tr><tr><th>当月零附件目标</th><td>36,100.00</td></tr><tr><th>当月零附件达成</th><td>17,973.24</td></tr><tr><th>当月零附件达成率</th><td>49.79%</td></tr><tr><th>Q1零件目标</th><td>89,900.00</td></tr><tr><th>Q1零件达成</th><td>42,220.53</td></tr><tr><th>Q1零件达成率</th><td>46.96%</td></tr></table></div><div class='panel'><h3>保险平台</h3><table class='kv'><tr><th>新保出单</th><td>0</td></tr><tr><th>续保出单</th><td>0</td></tr><tr><th>续保录单</th><td>0</td></tr><tr><th>续保汇总</th><td>0</td></tr><tr><th>忠诚用户</th><td>163</td></tr><tr><th>当前续保率</th><td>0.00%</td></tr><tr><th>参考续保率（季度平均）</th><td>0.00%</td></tr><tr><th>当季度续保汇总累加</th><td>0</td></tr></table></div><div class='panel'><h3>客诉 / 线索</h3><table class='kv'><tr><th>总数</th><td>9</td></tr><tr><th>未关闭</th><td>0</td></tr><tr><th>已关闭</th><td>9</td></tr><tr><th>超时>0</th><td>0</td></tr></table></div><div class='panel'><h3>CSI</h3><table class='kv'><tr><th>本月维修合同数</th><td>3</td></tr><tr><th>评价客户数</th><td>0</td></tr><tr><th>参与率</th><td>0.00%</td></tr><tr><th>满意客户数</th><td>0</td></tr><tr><th>满意率</th><td>0.00%</td></tr></table></div><div class='panel'><h3>不满意客户清单</h3><div class='empty'>（本店无不满意客户）</div></div>
+      </div>
+    </section>
+    
+
+    <div class='footer'>本报告由系统自动生成</div>
+  </div>
+
+  <script>
+    const labels = ["重庆金团", "重庆瀚达", "重庆银马", "重庆万事新", "西藏鼎恒"];
+    new Chart(document.getElementById('incomeChart'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: '服务总收入',
+          data: [810136.9, 478420.25, 1029256.87, 949290.25, 3563.75],
+          backgroundColor: ['#2563eb','#0ea5e9','#10b981','#f59e0b','#8b5cf6'],
+          borderRadius: 8
+        }]
+      },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    });
+
+    new Chart(document.getElementById('leadChart'), {
+      type: 'doughnut',
+      data: {
+        labels,
+        datasets: [{
+          data: [8, 6, 13, 8, 9],
+          backgroundColor: ['#2563eb','#0ea5e9','#10b981','#f59e0b','#ef4444']
+        }]
+      },
+      options: { plugins: { legend: { position: 'bottom' } } }
+    });
+  </script>
+</body>
+</html>
